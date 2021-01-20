@@ -1,0 +1,16 @@
+/* app global css */
+html {
+  height: 100%;
+  box-sizing: border-box;
+  color: #2c3e50;
+}
+body,
+#q-app{
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow: hidden;
+  font-family: 'Roboto', '-apple-system', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+}
