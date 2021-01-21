@@ -77,7 +77,7 @@ export default {
     }
   },
   computed: {
-    // 获取缓存列表
+    // Get cache list
     getKeepAliveList () {
       return this.$store.getters.getKeepAliveList
     },

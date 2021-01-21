@@ -1,4 +1,4 @@
-/* 全局 transition 动画 css */
+/* Global transition animation css */
 
 .fade-enter-active,
 .fade-leave-active {
@@ -58,4 +58,13 @@
 .breadcrumb-leave-to {
   opacity: 0;
   transform: translateX(65px);
+}
+
+/* tagView transition */
+
+.tagView-enter-active {
+  transition: opacity .5s;
+}
+.tagView-enter, .tagView-leave-to {
+  opacity: 0;
 }

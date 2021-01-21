@@ -1,6 +1,6 @@
 
 /**
- * 需要授权访问的路由
+ * Routes that require authorized access
  */
 const asyncRoutesChildren = [
   {
@@ -288,7 +288,7 @@ const asyncRoutesChildren = [
     component: () => import('../pages/components/cimo')
   },
   {
-    path: '*', // 此处需置于最底部
+    path: '*', // This must be placed at the bottom
     redirect: '/NoFound404',
     meta: {
       roles: ['admin', 'test'],

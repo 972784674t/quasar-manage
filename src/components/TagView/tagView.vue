@@ -20,9 +20,8 @@
           主页
         </q-chip>
       </router-link>
-
+<!--      <transition-group name="tagView">-->
       <template v-for="(v,i) in tagView">
-<!--        <transition name="tag-view" mode="out-in" :key="v.path">-->
           <router-link :to="v.fullPath" style="text-decoration: none" :key="v.fullPath">
             <q-chip
               v-ripple
@@ -63,8 +62,8 @@
               </q-menu>
             </q-chip>
           </router-link>
-<!--        </transition>-->
       </template>
+<!--      </transition-group>-->
     </q-tabs>
 
   </div>
@@ -77,8 +76,19 @@ export default {
   name: 'tagView',
   data () {
     return {
-      tagView: this.$store.getters.getTagView,
-      isRemovable: false
+      tagView: this.$store.getters.getTagView
+    }
+  },
+  computed: {
+    getTagView () {
+      return this.$store.getters.getTagView
+    }
+  },
+  watch: {
+    getTagView (newVal, oldVal) {
+      this.tagView = newVal
+      this.$store.commit('SET_KEEPALIVELIST', this.tagView)
+      window.sessionStorage.setItem('tagView', JSON.stringify(this.tagView))
     }
   },
   methods: {
@@ -93,18 +103,6 @@ export default {
     },
     removeOthersTagView (i) {
       this.$store.commit('REMOVE_TAG_VIEW', { side: 'others', index: i })
-    }
-  },
-  computed: {
-    getTagView () {
-      return this.$store.getters.getTagView
-    }
-  },
-  watch: {
-    getTagView (newVal, oldVal) {
-      this.tagView = newVal
-      this.$store.commit('SET_KEEPALIVELIST', this.tagView)
-      window.sessionStorage.setItem('tagView', JSON.stringify(this.tagView))
     }
   }
 }

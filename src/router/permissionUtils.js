@@ -1,10 +1,11 @@
 import store from '../store'
 
 /**
- * <分治法> 构造符合权限的路由，将不符合权限的路由过滤
- * @param router 未过滤的路由 因为最外层有一层用来做布局的 {index} 路由，所以传的是 index[0].children
- * @param t 暂存变量
- * @returns {*} 过滤后的路由
+ * <分治法> Construct routes that comply with permissions, and filter routes that do not comply with permissions
+ * @param router Unfiltered route : Because the outermost layer has a {index} route for layout,
+ *                                  the parameter is index[0].children
+ * @param t Temporary variable
+ * @returns {*} Filtered route
  */
 function constructionRouters (router, t) {
   t = router.filter(item => { return item.meta.roles.indexOf(store.getters.getRole) !== -1 })

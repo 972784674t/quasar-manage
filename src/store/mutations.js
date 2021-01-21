@@ -3,20 +3,29 @@ import constructionRouters from '../router/permissionUtils'
 import deepClone from '../utils/clone-utils'
 import router, { resetRouter } from '../router'
 import { removeATagView, removeOneSide } from '../components/TagView/tagViewUtils'
-// import { path404 } from '../components/404/error404'
 
 const mutations = {
 
-  // 设置用户类型，并根据权限获取授权路由
+  /**
+   * Set the user type, and obtain authorized routing according to permissions
+   * @param state
+   * @param payload
+   * @constructor
+   */
   SET_ROLES_AND_ROUTES: (state, payload) => {
     state.role = payload
-    // 深拷贝
+    // deepClone
     const accessRoutes = deepClone(asyncRoutes)
     accessRoutes[0].children = constructionRouters(accessRoutes[0].children)
     state.routes = accessRoutes
   },
 
-  // 退出登录
+  /**
+   * sign out
+   * @param state
+   * @param payload
+   * @constructor
+   */
   LOGOUT: (state, payload) => {
     state.role = 'admin'
     state.routes = []
@@ -26,19 +35,24 @@ const mutations = {
     resetRouter()
   },
 
-  // 新增tagView
+  /**
+   * Add tag View
+   * @param state
+   * @param payload
+   * @constructor
+   */
   ADD_TAG_VIEW: (state, payload) => {
     const size = state.tagView.length
-    // 首次进入或刷新页面时，当前路由不是根路由
+    // When entering or refreshing the page for the first time, the current route is not the root route
     if (!size && payload.fullPath !== '/') {
       state.tagView.push(payload)
     }
-    // 为了避免 tagView 重复添加。 构建一个以 fullPath 为标识的数组 t[]
+    // To avoid adding tagView repeatedly. Construct an array t[] identified by fullPath
     const t = []
     for (let i = 0; i < size; i++) {
       t.push(state.tagView[i].fullPath)
     }
-    // 如果 t[] 中没有当前路由，则添加
+    // If there is no current route in t[], add
     if (t.indexOf(payload.fullPath) < 0 && size) {
       state.tagView.push(payload)
     }
@@ -49,12 +63,12 @@ const mutations = {
   },
 
   /**
-   * 移除 tagView
-   * case 'undefined' : 移除所有 tagView
-   * case 'object' : 移除某一侧 tagView
-   * default '要删除元素的下标 i ' : 移除某一个 tagView
-   *          如果移除的是第一个 tagView，则跳转到当前的第一个 tagView
-   *          如果移除的是最后一个 tagView，则跳转到当前的最后一个 tagView
+   * remove tagView
+   * case 'undefined' : Remove all tagView
+   * case 'object' : Remove one side tagView
+   * default 'The subscript i of the element to be deleted ' : Remove the i-th tagView
+   *          If the first tagView is removed, jump to the current first tagView
+   *          If the last tagView is removed, jump to the current last tagView
    * @param state
    * @param payload
    * @constructor
@@ -62,6 +76,7 @@ const mutations = {
   REMOVE_TAG_VIEW: (state, payload) => {
     switch (typeof payload) {
       case 'undefined':
+        // remove all tagView
         state.tagView = []
         window.sessionStorage.setItem('tagView', '[]')
         router.push('/')
@@ -74,13 +89,18 @@ const mutations = {
     }
   },
 
-  // 设置面包屑
+  /**
+   * Set breadcrumbs
+   * @param state
+   * @param payload
+   * @constructor
+   */
   SET_BREADCRUMBS: (state, payload) => {
     state.breadcrumbs = payload
   },
 
   /**
-   * 设置缓存列表
+   * Set cache list according to tagView
    * @param payload tagView[]
    */
   SET_KEEPALIVELIST: (state, payload) => {
@@ -90,7 +110,8 @@ const mutations = {
         state.keepAliveList.push(payload[i].name)
       }
     }
-    // 如果需要缓存首页，如下方所示，在方法最后 push 对应的路由组件名称即可
+    // If you need to cache the homepage, as shown below,
+    // push the corresponding routing component name at the end of the method.
     // state.keepAliveList.push('home')
     return state.keepAliveList
   }

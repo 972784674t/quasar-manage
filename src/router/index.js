@@ -1,7 +1,6 @@
 // import Vue from 'vue'
 // import VueRouter from 'vue-router'
-// // import constantRoutes from 'src/router/constantRoutes'
-// import routes from 'src/router/routes'
+// import constantRoutes from 'src/router/constantRoutes'
 //
 // Vue.use(VueRouter)
 //
@@ -24,7 +23,7 @@
 //
 // const createRouter = () => new VueRouter({
 //   scrollBehavior: () => ({ x: 0, y: 0 }),
-//   routes,
+//   constantRoutes,
 //
 //   // Leave these as they are and change in quasar.conf.js instead!
 //   // quasar.conf.js -> build -> vueRouterMode

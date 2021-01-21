@@ -1,5 +1,5 @@
 /**
- * 公共路由
+ * constantRoutes : Users do not need to log in to access
  */
 const constantRoutes = [
   {

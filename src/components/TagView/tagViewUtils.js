@@ -1,11 +1,14 @@
 import store from '../../store/index'
 import router from '../../router'
 import { getFirst } from 'src/utils/clone-utils'
-import _this from 'vue'
+// import _this from '../../boot/main'
 
-// Construct the meta-information of the tagView,
-// and submit it to the store,
-// if it meets the conditions (not a public route), generate the tagView element
+/**
+ * Construct the meta-information of the tagView,
+ * and submit it to the store,
+ * if it meets the conditions (not a public route), generate the tagView element
+ * @param to
+ */
 export function addTagView (to) {
   // Construct a temporary tagView object
   const t = {
@@ -23,11 +26,19 @@ export function addTagView (to) {
   }
 }
 
+/**
+ * if it is a refresh operation, get the saved tagView information from sessionStorage
+ * @param tagView
+ */
 export function setTagView (tagView) {
   store.commit('SET_TAG_VIEW', tagView)
 }
 
-// Only remove one tagView
+/**
+ * Only remove one tagView
+ * @param state
+ * @param payload
+ */
 export function removeATagView (state, payload) {
   // Record removed routes
   const removedTagView = state.tagView[payload].fullPath
@@ -37,23 +48,29 @@ export function removeATagView (state, payload) {
     window.sessionStorage.setItem('tagView', '[]')
     router.push('/')
   } else {
+    console.log(removedTagView)
+    console.log(window.location.href)
     // If the last tagView is removed, the route jumps to the current last tagView
-    if (payload === state.tagView.length && _this.$route.path === removedTagView) {
+    if (payload === state.tagView.length && window.location.href.indexOf(removedTagView) !== -1) {
       router.push(state.tagView[payload - 1].fullPath)
       return
     }
     // If the first tagView is removed, the route jumps to the next tagView
-    if (payload === 0 && _this.$route.path === removedTagView) {
+    if (payload === 0 && window.location.href.indexOf(removedTagView) !== -1) {
       router.push(state.tagView[0].fullPath)
       return
     }
-    if (_this.$route.path === removedTagView) {
+    if (window.location.href.indexOf(removedTagView) !== -1) {
       router.push(state.tagView[payload - 1].fullPath)
     }
   }
 }
 
-// Remove one side of tagView
+/**
+ * Remove one side of tagView
+ * @param state
+ * @param payload
+ */
 export function removeOneSide (state, payload) {
   switch (payload.side) {
     case 'right':
