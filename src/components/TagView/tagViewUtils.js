@@ -20,7 +20,6 @@ export function addTagView (to) {
   getFirst(to.params) !== undefined && (t.title = t.title + '：' + getFirst(to.params))
   if (t.title !== null && t.title !== undefined && t.fullPath !== '/' && t.fullPath.indexOf('#') === -1) {
     store.commit('ADD_TAG_VIEW', t)
-    console.log('add', t.fullPath)
   }
 }
 
@@ -41,7 +40,6 @@ export function setTagView (tagView) {
 export function removeATagView (state, payload) {
   // Record removed routes
   const removedTagView = state.tagView[payload].fullPath
-  console.log('移除：', removedTagView)
   state.tagView.splice(payload, 1)
   // If tagView is empty
   if (state.tagView.length === 0) {
@@ -50,18 +48,15 @@ export function removeATagView (state, payload) {
   } else {
     // If the last tagView is removed, the route jumps to the current last tagView
     if (payload === state.tagView.length && window.location.href.indexOf(removedTagView) !== -1) {
-      console.log('1-->', state.tagView[payload - 1].fullPath)
       router.push(state.tagView[payload - 1].fullPath)
       return
     }
     // If the first tagView is removed, the route jumps to the next tagView
     if (payload === 0 && window.location.href.indexOf(removedTagView) !== -1) {
-      console.log('2-->', state.tagView[0].fullPath)
       router.push(state.tagView[0].fullPath)
       return
     }
     if (window.location.href.indexOf(removedTagView) !== -1) {
-      console.log('3-->', state.tagView[payload - 1].fullPath)
       router.push(state.tagView[payload - 1].fullPath)
     }
   }

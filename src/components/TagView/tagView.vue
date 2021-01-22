@@ -25,30 +25,20 @@
         </template>
       </q-route-tab>
 
-<!--      <router-link to="/" style="text-decoration: none">-->
-<!--        <q-chip-->
-<!--          v-ripple-->
-<!--          icon="home"-->
-<!--          :text-color="'/' === $route.path?'primary':''"-->
-<!--          square-->
-<!--          class="tagView relative-position">-->
-<!--          主页-->
-<!--        </q-chip>-->
-<!--      </router-link>-->
-
       <template v-for="(v,i) in tagView">
         <q-route-tab
           class="tagView relative-position"
           :key="v.fullPath + i"
           :to="v.fullPath"
           no-caps
+          exact
           content-class="tagView-q-router-tab"
         >
           <template slot="default">
             <q-icon size="21px" :name="v.icon"/>
             <div class="line-limit-length" style="margin: 0px 5px 0px 5px;">{{ v.title }}</div>
             <q-icon class="tagView-remove-icon" size="1.2rem" name="close"
-                    @click="$store.commit('REMOVE_TAG_VIEW',i)"/>
+                    @click.prevent.stop="removeAtagView(i)"/>
             <q-menu
               touch-position
               context-menu
@@ -82,50 +72,6 @@
 
       </template>
 
-<!--      <transition-group name="tagView">-->
-<!--      <template v-for="(v,i) in tagView">-->
-<!--          <router-link :draggable="false" :to="v.fullPath" style="text-decoration: none" :key="v.fullPath">-->
-<!--            <q-chip-->
-<!--              v-ripple-->
-<!--              :icon="v.icon"-->
-<!--              icon-remove="close"-->
-<!--              :text-color="v.fullPath === $route.path?'primary':''"-->
-<!--              removable-->
-<!--              class="tagView relative-position"-->
-<!--              @remove="$store.commit('REMOVE_TAG_VIEW',i)"-->
-<!--            >-->
-<!--              <div class="line-limit-length">{{ v.title }}</div>-->
-<!--              <q-menu-->
-<!--                touch-position-->
-<!--                context-menu-->
-<!--              >-->
-<!--                <q-list dense>-->
-<!--                  <q-item clickable v-close-popup>-->
-<!--                    <q-item-section @click="removeOthersTagView(i)">-->
-<!--                      关闭其他-->
-<!--                    </q-item-section>-->
-<!--                  </q-item>-->
-<!--                  <q-item clickable v-close-popup>-->
-<!--                    <q-item-section @click="removeRightTagView(i)">-->
-<!--                      关闭右侧-->
-<!--                    </q-item-section>-->
-<!--                  </q-item>-->
-<!--                  <q-item clickable v-close-popup>-->
-<!--                    <q-item-section @click="removeLeftTagView(i)">-->
-<!--                      关闭左侧-->
-<!--                    </q-item-section>-->
-<!--                  </q-item>-->
-<!--                  <q-item clickable v-close-popup>-->
-<!--                    <q-item-section @click="removeAllTagView">-->
-<!--                      关闭所有-->
-<!--                    </q-item-section>-->
-<!--                  </q-item>-->
-<!--                </q-list>-->
-<!--              </q-menu>-->
-<!--            </q-chip>-->
-<!--          </router-link>-->
-<!--      </template>-->
-<!--      </transition-group>-->
     </q-tabs>
 
   </div>
@@ -156,6 +102,9 @@ export default {
   methods: {
     removeAllTagView () {
       this.$store.commit('REMOVE_TAG_VIEW')
+    },
+    removeAtagView (i) {
+      this.$store.commit('REMOVE_TAG_VIEW', i)
     },
     removeLeftTagView (i) {
       this.$store.commit('REMOVE_TAG_VIEW', { side: 'left', index: i })
@@ -196,7 +145,7 @@ export default {
   .tagView-remove-icon {
     opacity: 0.58;
     border-radius: .2rem;
-    transition: all .5s;
+    transition: all .3s;
   }
 
   .tagView-remove-icon:hover {

@@ -14,7 +14,7 @@ import { addTagView, setTagView } from '../components/TagView/tagViewUtils'
 export default async ({ app, router, Vue, store }) => {
   router.beforeEach((to, from, next) => {
     // Process TAGVIEW and breadcrumbs after successful login
-    handleTagViewAndBreadcrumbsAndKeepAlive(to, store, Vue)
+    handleTagViewAndBreadcrumbsAndKeepAlive(from, to, store, Vue)
     // Simulate obtaining token
     const token = sessionStorage.getItem('access_token')
     const userRole = sessionStorage.getItem('user_role')
@@ -55,7 +55,7 @@ export default async ({ app, router, Vue, store }) => {
  * Processing tagView and breadcrumbs
  * @param to
  */
-function handleTagViewAndBreadcrumbsAndKeepAlive (to, store, Vue) {
+function handleTagViewAndBreadcrumbsAndKeepAlive (from, to, store, Vue) {
   if (to.name != null) {
     document.title = to.meta.title + Vue.prototype.$title
     LoadingBar.start()
@@ -72,7 +72,7 @@ function handleTagViewAndBreadcrumbsAndKeepAlive (to, store, Vue) {
     if (store.getters.getTagView.length === 0 && tagViewOnSS.length !== 0) {
       setTagView(tagViewOnSS)
       store.commit('SET_KEEPALIVE_LIST', tagViewOnSS)
-    } else {
+    } else if (from.fullPath !== to.fullPath) {
       addTagView(to)
     }
     setBreadcrumbs(to.matched)
