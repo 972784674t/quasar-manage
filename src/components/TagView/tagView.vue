@@ -136,6 +136,7 @@ export default {
     background: white;
     transition: all .5s;
     border-radius: 0;
+    height: 31px;
   }
 
   .tagView:hover {
