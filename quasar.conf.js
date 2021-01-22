@@ -47,6 +47,7 @@ module.exports = function (/* ctx */) {
 
     // Full list of options: https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-build
     build: {
+      publicPath: process.env.NODE_ENV === 'production' ? '/quasar-manage/' : '/',
       vueRouterMode: 'hash', // available values: 'hash', 'history'
 
       // transpile: false,
@@ -54,13 +55,19 @@ module.exports = function (/* ctx */) {
       // Add dependencies for transpiling with Babel (Array of string/regex)
       // (from node_modules, which are by default not transpiled).
       // Applies only if "transpile" is set to true.
-      // transpileDependencies: [],
+      transpileDependencies: [
+        'vue-echarts',
+        '@kangc'
+      ],
 
       // rtl: false, // https://quasar.dev/options/rtl-support
       // preloadChunks: true,
-      // showProgress: false,
-      // gzip: true,
+      showProgress: false,
+      gzip: true,
       analyze: true,
+
+      // sourcemap
+      productionSourceMap: false,
 
       // Options below are automatically set depending on the env, set them if you want to override
       // extractCSS: false,
