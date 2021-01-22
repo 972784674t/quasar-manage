@@ -15,16 +15,16 @@ import layout from '../components/layout/layout'
   name: 'about-router',               // 路由名称
   meta: {
     roles: ['admin', 'editor'],       // 能访问此路由的权限
-    title: '路由和权限',               // 菜单 title
-    icon: 'blur_on',                  // 菜单 icon
-    itemLabel: 'MY SHARE',            // [非必须] 需要显示在该菜单前的 label
-    isOpen: true,                     // [非必须] 菜单是否默认展开，默认为 false
+    title: '路由和权限',               // 导航 title
+    icon: 'blur_on',                  // [非必须] 导航 icon
+    itemLabel: 'MY SHARE',            // [非必须] 需要显示在该导航前的 label
+    isOpen: true,                     // [非必须] 导航是否默认展开，默认为 false
     keepAlive: true,                  // [非必须] 组件是否缓存，默认为 false
-    isHidden: false                   // [非必须] 是否在菜单中显示，默认为 false
+    isHidden: false                   // [非必须] 是否在导航中显示，默认为 false
   },
   component: layout,         // 如果此路由是菜单的展开项，请引入 layout 布局
-  children:[{...}]  
-} 
+  children:[{...}]
+}
 ```
 ## ```router```文件夹说明：
 ```sh
@@ -32,8 +32,8 @@ router
 ├─ asyncRoutes.js                 # 权限路由
 ├─ constantRoutes.js              # 公共路由
 ├─ index.js                       # 路由主文件
-├─ permission.js                  # 路由守卫和权限控制
 └─ permissionUtils.js             # 权限控制工具类
+permission.js                     # 路由守卫和权限控制 (在 boot 目录)
 ```
 其中 ```constantRoutes.js``` 维护了一个无需权限即可访问的公共路由，如：登录界面、404界面、500界面等。
 
@@ -49,7 +49,7 @@ export function resetRouter () {
 
 // 定义创建路由方法，方便重置路由时调用
 const createRouter = () => new VueRouter({
-  mode: 'history',
+  mode: process.env.VUE_ROUTER_MODE,
   base: process.env.BASE_URL,
   routes: constantRoutes
 })
@@ -93,19 +93,15 @@ import store from '../store'
  * @param t 暂存变量
  * @returns t 过滤后的路由
  */
-function constructionRouters (router, t) {
-  // 根据存储在 store 中的用户权限，进行一次过滤
+export default function constructionRouters (router, t) {
   t = router.filter(item => { return item.meta.roles.indexOf(store.getters.getRole) !== -1 })
   for (const i in t) {
-    // 如果有 chilren 就继续过滤 chilren
     if (t[i].children) {
       t[i].children = constructionRouters(t[i].children)
     }
   }
   return t
 }
-
-export default constructionRouters
 ```
 ### stroe 中保存 accessionRouter 的方法
 :::tip

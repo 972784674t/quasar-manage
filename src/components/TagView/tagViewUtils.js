@@ -1,11 +1,9 @@
 import store from '../../store/index'
 import router from '../../router'
 import { getFirst } from 'src/utils/clone-utils'
-// import _this from '../../boot/main'
 
 /**
- * Construct the meta-information of the tagView,
- * and submit it to the store,
+ * Construct the meta-information of the tagView,and submit it to the store,
  * if it meets the conditions (not a public route), generate the tagView element
  * @param to
  */
@@ -18,16 +16,17 @@ export function addTagView (to) {
     icon: to.meta.icon,
     keepAlive: to.meta.keepAlive || false
   }
-  if (getFirst(to.params) !== undefined) {
-    t.title = t.title + '：' + getFirst(to.params)
-  }
+  // If there are parameters, add the first parameter to the title
+  getFirst(to.params) !== undefined && (t.title = t.title + '：' + getFirst(to.params))
   if (t.title !== null && t.title !== undefined && t.fullPath !== '/' && t.fullPath.indexOf('#') === -1) {
     store.commit('ADD_TAG_VIEW', t)
+    console.log('add', t.fullPath)
   }
 }
 
 /**
  * if it is a refresh operation, get the saved tagView information from sessionStorage
+ * then call this method
  * @param tagView
  */
 export function setTagView (tagView) {
@@ -42,25 +41,27 @@ export function setTagView (tagView) {
 export function removeATagView (state, payload) {
   // Record removed routes
   const removedTagView = state.tagView[payload].fullPath
+  console.log('移除：', removedTagView)
   state.tagView.splice(payload, 1)
   // If tagView is empty
   if (state.tagView.length === 0) {
     window.sessionStorage.setItem('tagView', '[]')
     router.push('/')
   } else {
-    console.log(removedTagView)
-    console.log(window.location.href)
     // If the last tagView is removed, the route jumps to the current last tagView
     if (payload === state.tagView.length && window.location.href.indexOf(removedTagView) !== -1) {
+      console.log('1-->', state.tagView[payload - 1].fullPath)
       router.push(state.tagView[payload - 1].fullPath)
       return
     }
     // If the first tagView is removed, the route jumps to the next tagView
     if (payload === 0 && window.location.href.indexOf(removedTagView) !== -1) {
+      console.log('2-->', state.tagView[0].fullPath)
       router.push(state.tagView[0].fullPath)
       return
     }
     if (window.location.href.indexOf(removedTagView) !== -1) {
+      console.log('3-->', state.tagView[payload - 1].fullPath)
       router.push(state.tagView[payload - 1].fullPath)
     }
   }

@@ -1,5 +1,5 @@
 <template>
-  <div class="q-gutter-sm row items-center no-wrap">
+  <div class="q-gutter-sm row items-center no-wrap q-electron-drag--exception">
     <q-input  dense outlined v-model="search" style="min-width: 60px" input-class="text-right" class="q-ml-md">
       <template v-slot:append>
         <q-icon  v-if="search === ''" name="search" />
@@ -53,6 +53,11 @@
       </q-avatar>
       <q-tooltip>账号</q-tooltip>
     </q-btn>
+    <div class="electron-only">
+      <q-btn dense flat icon="minimize" @click="minimize"/>
+      <q-btn dense flat :icon="isMaximize?'crop_square':'flip_to_front'"  @click="maximize"/>
+      <q-btn dense flat icon="close" @click="closeApp"/>
+    </div>
   </div>
 </template>
 
@@ -63,7 +68,8 @@ export default {
     return {
       search: '',
       mobileData: false,
-      bluetooth: true
+      bluetooth: true,
+      isMaximize: true
     }
   },
   methods: {
@@ -90,10 +96,41 @@ export default {
           })
       }
     },
+
     logout () {
       this.$store.commit('LOGOUT')
       this.$router.push('/')
       window.sessionStorage.clear()
+      if (process.env.MODE === 'electron') {
+        this.$q.electron.remote.getCurrentWindow().setSize(500, 490)
+        this.$q.electron.remote.getCurrentWindow().center()
+      }
+    },
+
+    // electron
+    minimize () {
+      if (process.env.MODE === 'electron') {
+        this.$q.electron.remote.BrowserWindow.getFocusedWindow().minimize()
+      }
+    },
+
+    maximize () {
+      if (process.env.MODE === 'electron') {
+        const win = this.$q.electron.remote.BrowserWindow.getFocusedWindow()
+        if (win.isMaximized()) {
+          win.unmaximize()
+          this.isMaximize = !this.isMaximize
+        } else {
+          win.maximize()
+          this.isMaximize = !this.isMaximize
+        }
+      }
+    },
+
+    closeApp () {
+      if (process.env.MODE === 'electron') {
+        this.$q.electron.remote.BrowserWindow.getFocusedWindow().close()
+      }
     }
   }
 }

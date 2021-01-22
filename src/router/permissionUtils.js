@@ -7,7 +7,7 @@ import store from '../store'
  * @param t Temporary variable
  * @returns {*} Filtered route
  */
-function constructionRouters (router, t) {
+export default function constructionRouters (router, t) {
   t = router.filter(item => { return item.meta.roles.indexOf(store.getters.getRole) !== -1 })
   for (const i in t) {
     if (t[i].children) {
@@ -16,5 +16,3 @@ function constructionRouters (router, t) {
   }
   return t
 }
-
-export default constructionRouters

@@ -1,4 +1,7 @@
 ## 体积性能优化
+:::tip
+这篇文章针对的是 [vue-quasar-manage](https://github.com/972784674t/vue-quasar-manage) 项目
+:::
 最近发现项目在```github```上启动速度达到恐怖的 8 秒，在```gitee```的启动速度也很慢，3.04 秒，首页动画是通过 CDN 加载进来的，所以没有算在内，```github```8秒，国外吧，那也没啥好说的
 
 但是```gitee```的启动速度 3.04 秒
@@ -12,7 +15,7 @@
 直接定位问题，然后顺便把体积性能优化的过程也写出来吧。
 
 ### 定位问题
-在 v1.0.1 beta 版本中发现路由组件懒加载无效，导致```chunk-vendors```文件大小达到 5M，同时```quasar```体积达到 1M 
+在 v1.0.1 beta 版本中发现路由组件懒加载无效，导致```chunk-vendors```文件大小达到 5M，同时```quasar```体积达到 1M
 
 问题原因出在用来做嵌套路由布局的 ```layout```组件上，当时```layout```组件不是懒加载的，是在路由声明时一次性加载完成，同时它还把本该懒加载的组件都加载进来了，因此导致体积过大。
 
@@ -28,7 +31,7 @@
 
 1. 单组件 / UI 组件按需引入
 2. 路由懒加载
-3. 通过 CDN 获取资源，而不是将资源打包到项目中 
+3. 通过 CDN 获取资源，而不是将资源打包到项目中
 4. 关闭```sourcemap```文件打包
 5. Gzip 压缩项目资源
 6. 对于字体等体积较大的静态资源，开启浏览器缓存
@@ -183,7 +186,7 @@ module.exports = {
   configureWebpack: config => {
     // 生产环境配置
     if (process.env.NODE_ENV === 'production') {
-    
+
       // 消除 console 输出信息
       config.optimization.minimizer[0].options.terserOptions.compress.drop_console = true
 
@@ -191,7 +194,7 @@ module.exports = {
       const CompressionPlugin = require('compression-webpack-plugin')
       config.plugins.push(
         new CompressionPlugin({
-          algorithm: 'gzip',  // 
+          algorithm: 'gzip',  //
           test: /\.(js|css|woff|woff2|svg)$/, // 哪些文件会被压缩
           threshold: 10240, // 对超过10k的数据压缩
           deleteOriginalAssets: false, // 不删除压缩前的文件，如果浏览器不支持 Gzip ,则会加载源文件
@@ -202,7 +205,7 @@ module.exports = {
       // 将 js 文件夹添加时间戳，这样浏览器不会加载上个版本缓存的代码
       config.output.filename = `js/[name].${timeStamp}.js`
       config.output.chunkFilename = `js/[name].${timeStamp}.js`
-      
+
     } else {
       // 开发环境配置
     }
@@ -221,10 +224,10 @@ module.exports = {
    ......
 	# 开启gzip
 	gzip on;
-		
+
 	# 压缩的文件类型（如果没有你需要的类型，可以去 mime.types 里查看，然后复制过来）
 	gzip_types text/plain application/javascript application/x-javascript text/css application/xml text/javascript application/x-httpd-php image/jpeg image/gif image/png font/ttf font/otf image/svg+xml;
-		
+
 	# 是否在 http header 中添加 Vary: Accept-Encoding 建议开启
 	gzip_vary on;
 	 ......
@@ -255,7 +258,7 @@ app.use(compression())
 修改 tomcat 8 的 ```server.xml```，找到默认端口的位置，在后面添加配置如下
 ```html
 <Connector connectionTimeout="20000" port="8080" protocol="HTTP/1.1" redirectPort="8443"
-	compression="on" compressionMinSize="2048" noCompressionUserAgents="gozilla,traviata" 
+	compression="on" compressionMinSize="2048" noCompressionUserAgents="gozilla,traviata"
 	compressableMimeType="text/html,text/xml,text/css,application/javascript,text/plain"/>
 ```
 

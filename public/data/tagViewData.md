@@ -1,4 +1,4 @@
-## tagView 
+## tagView
 在SPA中因为减少了浏览器跳转，所以```tagView```的存在是必要的
 :::tip
 - 鼠标右键可以打开 ```tagView``` 菜单项，移动端下则是长按打开菜单项
@@ -39,7 +39,7 @@ tagView的实现并不复杂，不过处理逻辑挺复杂的，比如：
 
 下面是```tagView```事件处理入口，如果需要，请自行修改
 
-```mutations.js```中，```removeOneSide```和```removeATagView```方法在```tagViewUtils.js```里
+在```mutations.js```中，```removeOneSide```和```removeATagView```方法来自```tagViewUtils.js```
 ```js
 /**
  * 移除 tagView

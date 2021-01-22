@@ -19,32 +19,32 @@ import layout from '../components/layout/layout'
   name: 'about-router',               // 路由名称
   meta: {
     roles: ['admin', 'editor'],       // 能访问此路由的权限
-    title: '路由和权限',               // 菜单 title
-    icon: 'blur_on',                  // 菜单 icon
-    itemLabel: 'MY SHARE',            // [非必须] 需要显示在该菜单前的 label
-    isOpen: true,                     // [非必须] 菜单是否默认展开，默认为否
-    keepAlive: true,                  // [非必须] 组件是否缓存，默认为否
-    isHidden: false                   // [非必须] 是否在菜单中显示，默认为 false
+    title: '路由和权限',               // 导航 title
+    icon: 'blur_on',                  // [非必须] 导航 icon
+    itemLabel: 'MY SHARE',            // [非必须] 需要显示在该导航前的 label
+    isOpen: true,                     // [非必须] 导航是否默认展开，默认为 false
+    keepAlive: true,                  // [非必须] 组件是否缓存，默认为 false
+    isHidden: false                   // [非必须] 是否在导航中显示，默认为 false
   },
-  component: layout,         // 如果此路由是菜单的展开项，请引入layout布局
-  children:[{...}]  
-} 
+  component: layout,         // 如果此路由是菜单的展开项，请引入 layout 布局
+  children:[{...}]
+}
 ```
-在```BaseMenu.vue```菜单入口中，实现了两个功能 
+在```BaseMenu.vue```菜单入口中，实现了两个功能
 
 -  主菜单显示
 - 菜单底部额外链接的实现
 
 在主菜单实现时，需要传入三个参数
 ```html
- <base-menu-item 
+ <base-menu-item
    :my-router="menuList"     // 存储在 Vuex 中的授权路由
    :init-level="0"           // 菜单子元素头部缩进等级
    :bg-color="bgColor"       // 菜单子元素背景色
    :bg-color-level="1"       // 菜单子元素背景色深度，菜单层数越深，背景色越深
-   :duration="150"           // 菜单项展开速度 ms 
+   :duration="150"           // 菜单项展开速度 ms
  />
- 
+
 <script>
 import MyQMenuItem from './BaseMenuItem'
 export default {
@@ -63,7 +63,7 @@ export default {
 ```
 ### 如何自定义菜单背景色
 1、修改侧滑区域背景色
-在```index.vue```中
+在```layout/MainLayout.vue```中
 ```html
 <!-- 侧滑菜单 -->
 <q-drawer v-model="leftDrawerOpen"
@@ -103,4 +103,4 @@ export default {
 }
 </script>
 ```
-想做其他深入修改请看源码 [Menu](https://github.com/972784674t/vue-quasar-manage/tree/master/src/components/Menu)
+想做其他深入修改请看源码 [Menu](https://github.com/972784674t/quasar-manage/tree/master/src/components/Menu)

@@ -1,6 +1,6 @@
 ## keepAlive
 :::tip
-- 缓存上限在```config.js```中设置为10，如超出上限则使用LRU的策略置换缓存数据（没错就是计算机内存管理中的LRU）
+- 缓存上限在```quasar.manage.config.js```中设置为 10，如超出上限则使用 LRU 的策略置换缓存数据（没错就是计算机内存管理中的 LRU ）
 - 缓存不建议过多，内存很容易爆，如果需要大量缓存，建议引入```redis```或者浏览器自带的```storage```来处理缓存
 - 默认不缓存首页，如果需要请在```store/mutations.js```的```SET_KEEPALIVELIST```方法中根据自身需求修改(有示例代码)
 :::
@@ -108,7 +108,7 @@ export default {
     path: '/menu-1',
     name: 'menu-1',
     // 布局文件 ，用来实现多层嵌套的 组件访问，对于多层次的路由访问来说，这是必须的
-    component: layout,    
+    component: layout,
     children: [
       {
         path: 'menu-2',

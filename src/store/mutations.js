@@ -27,7 +27,7 @@ const mutations = {
    * @constructor
    */
   LOGOUT: (state, payload) => {
-    state.role = 'admin'
+    state.role = ''
     state.routes = []
     state.tagView = []
     sessionStorage.removeItem('access_token')
@@ -36,14 +36,14 @@ const mutations = {
   },
 
   /**
-   * Add tag View
+   * Add tagView
    * @param state
    * @param payload
    * @constructor
    */
   ADD_TAG_VIEW: (state, payload) => {
     const size = state.tagView.length
-    // When entering or refreshing the page for the first time, the current route is not the root route
+    // When entering or refreshing the page for the first time & the current route is not the root route
     if (!size && payload.fullPath !== '/') {
       state.tagView.push(payload)
     }
@@ -52,12 +52,18 @@ const mutations = {
     for (let i = 0; i < size; i++) {
       t.push(state.tagView[i].fullPath)
     }
-    // If there is no current route in t[], add
+    // If there is no current route in t[]
     if (t.indexOf(payload.fullPath) < 0 && size) {
       state.tagView.push(payload)
     }
   },
 
+  /**
+   * set tagView
+   * @param state
+   * @param payload
+   * @constructor
+   */
   SET_TAG_VIEW: (state, payload) => {
     state.tagView = payload
   },
@@ -86,6 +92,7 @@ const mutations = {
         break
       default:
         removeATagView(state, payload)
+        break
     }
   },
 
@@ -103,7 +110,7 @@ const mutations = {
    * Set cache list according to tagView
    * @param payload tagView[]
    */
-  SET_KEEPALIVELIST: (state, payload) => {
+  SET_KEEPALIVE_LIST: (state, payload) => {
     state.keepAliveList = []
     for (let i = 0; i < payload.length; i++) {
       if (payload[i].keepAlive) {
