@@ -8,7 +8,7 @@
 </p>
 
 Quasar-Manage 是一款中后台前端解决方案：
-- 基于 [quasar](http://www.quasarchs.com/) 实现，[quasar-ui](http://www.quasarchs.com/) 的设计规范来自 [Material Design](https://material.io/)
+- 基于 [Quasar](http://www.quasarchs.com/) 实现，[Quasar-ui](http://www.quasarchs.com/) 的设计规范来自 [Material Design](https://material.io/)
 - 包含动态路由，动态缓存，权限验证等常用功能
 - 兼容多端运行: SPA / Electron / Cordova
 - 响应式设计，支持手机 / 平板 / 桌面 /小分辨率屏幕显示
@@ -16,7 +16,7 @@ Quasar-Manage 是一款中后台前端解决方案：
 - 简单的代码逻辑，多种自定义组件，高度可定制性（只有 1600 行代码）
 - 完全开源及免费
 
-当然如果你想使用基于```vue-cli```版本的：[Vue-Quasar-Manage](https://github.com/972784674t/vue-quasar-manage)
+当然如果你想使用基于```VUE-CLI```版本的：[Vue-Quasar-Manage](https://github.com/972784674t/vue-quasar-manage)
 
 使用这个项目前您需要了解如下技术栈：
 
