@@ -16,7 +16,7 @@ Quasar-Manage 是一款中后台前端解决方案：
 - 简单的代码逻辑，多种自定义组件，高度可定制性（只有 1600 行代码）
 - 完全开源及免费
 
-当然如果你想使用基于```vue-cli```版本的：[Vue-Quasar-Manage](https://github.com/972784674t/quasar-manage)
+当然如果你想使用基于```vue-cli```版本的：[Vue-Quasar-Manage](https://github.com/972784674t/vue-quasar-manage)
 
 使用这个项目前您需要了解如下技术栈：
 
