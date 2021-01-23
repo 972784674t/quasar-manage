@@ -1,6 +1,6 @@
 <template>
 
-  <div class="flex justify-center items-center" style="height: 100%">
+  <div class="flex justify-center items-center q-electron-drag" style="height: 100%">
     <div class="row base-card-shadow electron-hide" style="width: 60vw;min-width: 300px">
       <div class="col-6 flex justify-center items-center " v-show="$q.screen.gt.sm">
         <q-skeleton type="text" height="70%" width="50%" v-if="!isLottieF"/>
@@ -65,13 +65,16 @@
     </div>
 
     <!-- electron 登录 -->
-    <div class="row base-card-shadow electron-only q-electron-drag" style="width: 100vw;min-width: 300px;background: rgba(255,255,255,0)">
+    <div class="row electron-only q-electron-drag" style="width: 100vw;min-width: 300px;background: rgba(255,255,255,0);">
+
       <div class="col flex justify-center items-center" v-show="$q.screen.gt.sm">
         <q-skeleton type="text" height="100%" width="50%" v-if="!isLottieF"/>
         <lottie-web-cimo align="right" style="height: 70%" :path="defaultOptions.path" @isLottieFinish="handleFinish"/>
       </div>
       <q-separator vertical inset v-if="$q.screen.gt.sm"/>
+
       <div class="col flex justify-center items-center">
+
         <q-card square style="min-width: 290px;height: 100%; width: 60%;" class="no-shadow">
           <q-card-section align="center">
             <h3 class="text-uppercase">cimo</h3>
