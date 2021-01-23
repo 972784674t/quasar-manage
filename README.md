@@ -10,8 +10,8 @@
 quasar-manage 是一款中后台前端解决方案：
 - 基于 [quasar](http://www.quasarchs.com/) 实现，[quasar-ui](http://www.quasarchs.com/) 的设计规范来自 [Material Design](https://material.io/)
 - 包含动态路由，动态缓存，权限验证等常用功能
-- 支持多端运行: SPA / Electron / Cordova
-- 响应式设计，支持手机 / 平板 / 桌面端 /小分辨率屏幕显示
+- 兼容多端运行: SPA / Electron / Cordova
+- 响应式设计，支持手机 / 平板 / 桌面 /小分辨率屏幕显示
 - 包含 tagView 快捷导航、面包屑导航等 SPA 应用常用功能
 - 简单的代码逻辑，多种自定义组件，高度可定制性（只有 1600 行代码）
 - 完全开源及免费
@@ -28,8 +28,11 @@ quasar-manage 是一款中后台前端解决方案：
 ![Electron](https://images.gitee.com/uploads/images/2021/0122/174410_adafb537_5663937.png "electron.png")
 
 <p align="center">
-    <img src="https://images.gitee.com/uploads/images/2021/0123/174943_5c56f9c7_5663937.png" alt="license">
- </p>
+    <img src="https://images.gitee.com/uploads/images/2021/0123/174943_5c56f9c7_5663937.png" alt="android">
+</p>
+
+### Electron
+之后 Electron 版本的更新将在 Electron 分支进行，感谢 [CloudWoR](https://github.com/CloudWoR) 提供的支持
 
 ### 如何运行
 请确保您的计算机已经安装了 ```Node.js``` 以及 ```git```，当前项目主要用于展示说明文档
