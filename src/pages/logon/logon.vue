@@ -174,7 +174,7 @@ export default {
             this.loading = !this.loading
             // 如果是 electron 则改变窗口大小
             if (process.env.MODE === 'electron') {
-              this.$q.electron.remote.getCurrentWindow().setSize(1200, 800)
+              this.$q.electron.remote.getCurrentWindow().setSize(1023, 768)
               this.$q.electron.remote.getCurrentWindow().center()
             }
           })
