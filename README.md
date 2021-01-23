@@ -7,7 +7,7 @@
   <img src="https://img.shields.io/npm/v/quasar.svg?label=quasar">  <img src="https://img.shields.io/npm/v/%40quasar/extras.svg?label=@quasar/extras"> 
 </p>
 
-quasar-manage 是一款中后台前端解决方案：
+Quasar-Manage 是一款中后台前端解决方案：
 - 基于 [quasar](http://www.quasarchs.com/) 实现，[quasar-ui](http://www.quasarchs.com/) 的设计规范来自 [Material Design](https://material.io/)
 - 包含动态路由，动态缓存，权限验证等常用功能
 - 兼容多端运行: SPA / Electron / Cordova
