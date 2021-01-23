@@ -21,7 +21,7 @@ Quasar-Manage 是一款中后台前端解决方案：
 [ES6](https://es6.ruanyifeng.com/) | [Node.js](https://nodejs.org/en/) | [webpack](https://www.webpackjs.com/) | [vue](https://cn.vuejs.org/) | [vuex](https://vuex.vuejs.org/zh/) | [vue-router](https://router.vuejs.org/zh/) | [vuex](https://vuex.vuejs.org/zh/) | [quasar-cli](http://www.quasarchs.com/start/quasar-cli) | [axios](http://www.axios-js.com/) | [ESlint](https://eslint.bootcss.com/) | [Electron：如果需要](https://www.electronjs.org/)
 ### DEMO地址 
 
-[Github](https://972784674t.github.io/vue-quasar-manage/) | [Gitee 国内用户访问](http://incimo.gitee.io/vue-quasar-manage)
+[Github](https://972784674t.github.io/quasar-manage/) | [Gitee 国内用户访问](http://incimo.gitee.io/quasar-manage)
 
 ![SPA](https://images.gitee.com/uploads/images/2020/1121/001642_63a6fa66_5663937.png "home.png")
 
