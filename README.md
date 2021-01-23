@@ -27,7 +27,9 @@ quasar-manage 是一款中后台前端解决方案：
 
 ![Electron](https://images.gitee.com/uploads/images/2021/0122/174410_adafb537_5663937.png "electron.png")
 
-![Android](https://images.gitee.com/uploads/images/2021/0123/172905_9b79007c_5663937.jpeg "android.jpg")
+<p align="center">
+    <img src="https://images.gitee.com/uploads/images/2021/0123/174943_5c56f9c7_5663937.png" alt="license">
+ </p>
 
 ### 如何运行
 请确保您的计算机已经安装了 ```Node.js``` 以及 ```git```，当前项目主要用于展示说明文档
