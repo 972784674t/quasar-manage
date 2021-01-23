@@ -16,6 +16,8 @@ Quasar-Manage 是一款中后台前端解决方案：
 - 简单的代码逻辑，多种自定义组件，高度可定制性（只有 1600 行代码）
 - 完全开源及免费
 
+当然如果你想使用基于```vue-cli```版本的：[vue-quasar-manage](https://github.com/972784674t/quasar-manage)
+
 使用这个项目前您需要了解如下技术栈：
 
 [ES6](https://es6.ruanyifeng.com/) | [Node.js](https://nodejs.org/en/) | [webpack](https://www.webpackjs.com/) | [vue](https://cn.vuejs.org/) | [vuex](https://vuex.vuejs.org/zh/) | [vue-router](https://router.vuejs.org/zh/) | [vuex](https://vuex.vuejs.org/zh/) | [quasar-cli](http://www.quasarchs.com/start/quasar-cli) | [axios](http://www.axios-js.com/) | [ESlint](https://eslint.bootcss.com/) | [Electron：如果需要](https://www.electronjs.org/)
