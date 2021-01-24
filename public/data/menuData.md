@@ -35,7 +35,7 @@ import layout from '../components/layout/layout'
 -  主菜单显示
 - 菜单底部额外链接的实现
 
-在主菜单实现时，需要传入三个参数
+在侧滑菜单实现时，需要传入三个参数 , 颜色列表均参考自 [Quasar 颜色列表](http://www.quasarchs.com/style/color-palette/#%E9%A2%9C%E8%89%B2%E5%88%97%E8%A1%A8)
 ```html
  <base-menu-item
    :my-router="menuList"     // 存储在 Vuex 中的授权路由
@@ -61,7 +61,7 @@ export default {
 }
 </script>
 ```
-### 如何自定义菜单背景色
+### 如何自定义菜单背景色，颜色参考[Quasar 颜色列表](http://www.quasarchs.com/style/color-palette/#%E9%A2%9C%E8%89%B2%E5%88%97%E8%A1%A8)
 1、修改侧滑区域背景色
 在```layout/MainLayout.vue```中
 ```html
@@ -73,20 +73,20 @@ export default {
    <base-menu/>
 </q-drawer>
 ```
-2、修改菜单元素样式
+2、如果需要，添加自定义修改菜单元素样式
 在```css```中添加
 ```css
 .bg-menu-item-1{
-  /* 颜色 1*/
+  /* 颜色 1 ： 当菜单深度为 1 时显示*/
 }
 .bg-menu-item-2{
-  /* 颜色 2*/
+  /* 颜色 2 ： 当菜单深度为 2 时显示*/
 }
 .bg-menu-item-3{
-  /* 颜色 3*/
+  /* 颜色 3 ： 当菜单深度为 3 时显示*/
 }
 ```
-修改背景色入口参数
+修改背景色入口参数，应用自定义颜色
 ```js
 <script>
 import MyQMenuItem from './BaseMenuItem'
@@ -102,5 +102,39 @@ export default {
   ...
 }
 </script>
+```
+### 修改```BaseMenuItem.vue```中的元素激活样式
+```css
+<style lang="sass">
+
+  /* item 颜色 */
+  $ITEM_COLOR: #2c3e50
+
+  /* item 激活时颜色 */
+  $ACTIVE_COLOR: #1976d2
+  $ACTIVE_BACKGROUND: rgba(25, 118, 210, 0.0618)
+
+  .base-menu-item
+    color: $ITEM_COLOR !important
+
+  /* item 被激活时父菜单的样式 */
+  .baseRootItemActive
+    color: $ACTIVE_COLOR !important
+
+  /* item 被激活时的样式 */
+  .baseItemActive
+    color: $ACTIVE_COLOR !important
+    background: $ACTIVE_BACKGROUND
+    transition: all .618s
+    &:after
+      content: ''
+      position: absolute
+      width: 3px
+      height: 100%
+      background: $ACTIVE_COLOR !important
+      top: -0.5px
+      right: 0px
+
+</style>
 ```
 想做其他深入修改请看源码 [Menu](https://github.com/972784674t/quasar-manage/tree/master/src/components/Menu)
