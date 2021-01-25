@@ -44,9 +44,9 @@ function createWindow () {
   })
 
   // devTools
-  session.defaultSession.loadExtension(
-    path.resolve(__dirname, '../../.devTools/shell-chrome') // 这个是刚刚build好的插件目录
-  )
+  // session.defaultSession.loadExtension(
+  //   path.resolve(__dirname, '../../.devTools/shell-chrome') // 这个是刚刚build好的插件目录
+  // )
 }
 
 app.on('ready', createWindow)
