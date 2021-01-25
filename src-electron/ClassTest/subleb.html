@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /**
+     *发布订阅：有一个对象，有人一直看着他
+     当这个对象发生变化时，第三方通知这个看着的人，触发方法
+     只需要一个构造函数
+      => 创建一个第三方店员的身份
+      => 模拟一个 addEventListener()
+      
+    分析构造函数：
+      属性：消息队列
+      {
+        click: [ fn1, fn2 ],
+        orther: [ fn1, fn2, fn3 ]
+      }
+      方法：能向消息队列里面添加内容
+      方法：删除消息队列里面的内容
+      方法：触发消息队列里面的内容
+    */
+   // 创建一个第三方观察者构造函数
+   class Observer {
+     constructor () {
+       this.message = {}
+     }
+     // 1. 向消息队列里面添加内容
+    on (type, fn) {
+      // type 事件名称
+      // fn 事件方法
+      // 把这些记录在消息队列
+      if (!this.message[type]) this.message[type] = []
+      this.message[type].push(fn)
+    }
+
+    // 2. 删除消息队列里面的内容
+    remove (type, fn) {
+      if (!this.message[type]) return
+      if (!fn) return delete this.message[type]
+      this.message = this.message[type].filter(item => item !== fn)
+    }
+
+    // 3. 触发消息队列
+    trigger (type) {
+      if (!this.message[type]) return
+      this.message[type].forEach( item => {
+        item()
+      })
+    }
+  }
+
+  // 使用构造函数创建一个实例
+  const person = new Observer()
+  // 当需要向person观察一些内容时
+  // 告诉person一个行为，当行为出现的时候，告诉person干什么
+  function handleA () { console.log('handleA') }
+  function handleB () { console.log('handleB') }
+  function handleC () { console.log('handleC') }
+  function handleD () { console.log('handleD') }
+  person.on('channel', handleA)
+  person.on('channel', handleB)
+  person.on('channel', handleC)
+  person.on('channel', handleD)
+  person.on('handleB', handleA)
+  person.trigger('channel')
+  console.log(person)
+  </script>
+</body>
+</html>

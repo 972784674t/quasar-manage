@@ -7,7 +7,7 @@
   "private": true,
   "scripts": {
     "dev:spa": "quasar dev",
-    "dev:electron": "quasar dev -m electron",
+    "dev:electron": "chcp 65001 && quasar dev -m electron",
     "build:spa": "quasar build",
     "build:electron": "quasar build -m electron",
     "clean": "quasar clean",

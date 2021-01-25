@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /**
+      策略模式：
+        一个问题匹配多个解决方案，不一定要用到哪一个
+        同时有可能随时会继续增加多个方案
+      例子：购物车结算
+        => 有多种折扣计算方式
+          => 满 100 减 10
+          => 满 200 减 25
+          => 8折
+          => 7折 
+    1. 把多种方案以闭包的形式保存起来
+      对外留一个接口, 按照传递进来的折扣方案计算最终的折扣价格
+    2. 留下添加折扣和删除折扣的接口
+      函数也是对象
+      可以把函数名当作一个对象，向里面添加额外成员
+    **/
+  // const calcPrice = (function () {
+  //   const sale = {
+  //     '100_10': function (price) { return price -= 10 },
+  //     '200_25': function (price) { return price -= 25},
+  //     '80%': function (price) { return price *= 0.8}
+  //   }
+  //   // 被return出去的函数，才是calcPrice本体
+  //   return function calcPrice(price, type) {
+  //     // 判断对象里面有没有这个折扣类型
+  //     // 如果有，就执行
+  //     // 如果没有，提示没有折扣类型
+  //     if (!sale[type]) return '没有这个折扣'
+  //     return sale[type](price)
+  //   }
+  // })()
+  const calcPrice = (function () {
+    const sale = {
+      '100_10': function (price) { return price -= 10 },
+      '200_25': function (price) { return price -= 25},
+      '80%': function (price) { return price *= 0.8}
+    }
+    function calcPrice(price, type) {
+      // 判断对象里面有没有这个折扣类型
+      // 如果有，就执行
+      // 如果没有，提示没有折扣类型
+      if (!sale[type]) return '没有这个折扣'
+      return sale[type](price)
+    }
+
+    // 把函数当作一个对象，向里面添加成员
+    calcPrice.add = function (type, fn) {
+      // 用来添加折扣
+      if (sale[type]) return '该折扣已存在'
+      sale[type] = fn
+      return true
+    }
+    
+    // 删除一个折扣
+    calcPrice.remove = function (type) {
+      delete sale[type]
+    }
+    return calcPrice
+  })()
+
+  calcPrice.add('70%', function (price) { return price *= 0.7 })
+  const res = calcPrice(320, '70%')
+  console.log(res)
+  calcPrice.remove('70%')
+  const res2 = calcPrice(321, '70%')
+  console.log(res2)
+
+  </script>
+</body>
+</html>

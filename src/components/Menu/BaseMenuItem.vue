@@ -125,8 +125,8 @@ export default {
   $ITEM_COLOR: #2c3e50
 
   /* item 激活时颜色 */
-  $ACTIVE_COLOR: #1976d2
-  $ACTIVE_BACKGROUND: rgba(25, 118, 210, 0.0618)
+  $ACTIVE_COLOR: linear-gradient(to top, #f3e7e9 0%, #e3eeff 99%, #e3eeff 100%)
+  $ACTIVE_BACKGROUND: linear-gradient(to top, #d5d4d0 0%, #d5d4d0 1%, #eeeeec 31%, #efeeec 75%, #e9e9e7 100%)
 
   .base-menu-item
     color: $ITEM_COLOR !important

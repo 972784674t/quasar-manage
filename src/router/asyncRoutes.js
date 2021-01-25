@@ -266,6 +266,18 @@ const asyncRoutesChildren = [
     component: () => import('../pages/lottie/lottie')
   },
   {
+    path: '/plugin-test',
+    name: 'my-plugin',
+    meta: {
+      roles: ['admin', 'editor'],
+      title: 'my-plugin',
+      itemLabel: '插件测试',
+      icon: 'videocam',
+      keepAlive: true
+    },
+    component: () => import('../pages/pluginTest')
+  },
+  {
     path: '/tableDetail/:id',
     name: 'tableDetail',
     meta: {

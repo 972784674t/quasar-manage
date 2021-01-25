@@ -13,11 +13,11 @@
             <h3 class="text-uppercase">cimo</h3>
             <!-- 用户名 -->
             <q-input class="logon-input"
-               clearable
-               standout="bg-cyan text-white"
-               bottom-slots
-               v-model="username"
-               label="账号"
+                     clearable
+                     standout="bg-cyan text-white"
+                     bottom-slots
+                     v-model="username"
+                     label="账号"
             >
               <template v-slot:prepend>
                 <q-icon name="account_circle"/>
@@ -25,11 +25,11 @@
             </q-input>
             <!-- 密码 -->
             <q-input class="logon-input"
-               standout="bg-cyan text-white"
-               bottom-slots
-               v-model="password"
-               label="密码"
-               :type="isPwd ? 'password' : 'text'" hint=""
+                     standout="bg-cyan text-white"
+                     bottom-slots
+                     v-model="password"
+                     label="密码"
+                     :type="isPwd ? 'password' : 'text'" hint=""
             >
               <template v-slot:prepend>
                 <q-icon name="vpn_key"/>
@@ -137,7 +137,7 @@
 
 <script>
 import LottieWebCimo from '../../components/LottieWebCimo/LottieWebCimo'
-
+import { mapMutations } from 'vuex'
 export default {
   name: 'logon',
   components: { LottieWebCimo },
@@ -156,10 +156,13 @@ export default {
     }
   },
   methods: {
+    ...mapMutations(['SET_TOKEN']),
     logon () {
       this.loading = !this.loading
       if (this.username === 'admin' || this.username === 'test') {
-        sessionStorage.setItem('access_token', 972784674)
+        // sessionStorage.setItem('access_token', 972784674)
+        // this.$token.setState(972784674)
+        this.SET_TOKEN(972784674)
         sessionStorage.setItem('user_role', this.username)
         const lt = setTimeout(() => {
           this.$router.push('/').then(e => {
@@ -172,11 +175,6 @@ export default {
             })
             clearTimeout(lt)
             this.loading = !this.loading
-            // 如果是 electron 则改变窗口大小
-            if (process.env.MODE === 'electron') {
-              this.$q.electron.remote.getCurrentWindow().setSize(1023, 768)
-              this.$q.electron.remote.getCurrentWindow().center()
-            }
           })
         }, Math.random() * 3000)
       } else {

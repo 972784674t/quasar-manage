@@ -2,7 +2,6 @@
   <base-content>
 
     <div class="base-markdown-content">
-
         <v-md-editor :value="content" mode="preview"/>
 
     </div>
@@ -36,6 +35,7 @@ export default {
   },
   mounted () {
     this.getMsg()
+    console.log(this.$token.setState('123123'))
   }
 }
 </script>

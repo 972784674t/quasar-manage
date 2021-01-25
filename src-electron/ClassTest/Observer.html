@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /**
+     * 观察者模式：监控一个对象的状态，一旦状态发生变化，立马触发函数
+     * => 需要两个构造函数来实现
+     *  1. 创建被观察者
+     *    => 属性，自己的状态
+     *    => 队列，记录都有谁观察着自己 => 数组[]
+     *    => 方法，能设置自己的状态，当需要改变的时候，要触发这个方法改变状态
+     *    => 方法，添加观察者
+     *    => 方法，删除观察者
+     *  2. 创建观察者
+     *    => 需要一个身份证明
+     *    => 需要一个执行函数
+     *  
+     **/
+    // 观察者构造函数
+    class Observer {
+      constructor (name, fn = () => {}) {
+        this.name = name
+        this.fn = fn
+      }
+    }
+    // 创建两个观察者
+    const obs1 = new Observer('obs1', () => { console.log('obs1观察者方法') })
+    const obs2 = new Observer('obs2', () => { console.log('obs2观察者方法')})
+
+    // 被观察者构造函数
+    class Subject {
+      constructor (state) {
+        this.state = state
+        // 数组用来保存观察着我的对象
+        this.observers = []
+      }
+      // 设置自己的状态
+      setState (val) {
+        this.state = val
+        // 状态改变，就需要触发所有观察者的方法
+        // 遍历 this.observers 依次触发
+        this.observers.forEach( item => {
+          // 告诉观察者状态
+          item.fn(this.state)
+        })
+      }
+      // 添加观察者
+      addObserver (obs) {
+        this.observers = this.observers.filter(item => item !== obs)
+        this.observers.push(obs)
+      }
+      // 删除观察者
+      removeObserver (obs) {
+        // 把obs观察者删除
+        this.observers = this.observers.filter(item => item === obs)
+      }
+    }
+
+    // 创建一个被观察者
+    const sub = new Subject('状态')
+    sub.addObserver(obs1)
+    sub.addObserver(obs2)
+    sub.addObserver(obs1)
+    console.log(sub)
+  </script>
+</body>
+</html>

@@ -36,6 +36,27 @@ const mutations = {
   },
 
   /**
+   * electron mode
+   * 调用此方法，视为运行electron模式，将切换窗口显示，或禁用相应窗口
+   * @param state
+   * @param payload
+   * @constructor
+   */
+  LOGON_ELECTRON: (state, payload) => {
+    console.log('LOGON调用')
+    if (process.env.MODE !== 'electron') throw new Error('非electron模式下，禁止调用')
+    console.log('electron mode')
+    state.role = payload
+    const accessRoutes = deepClone(asyncRoutes)
+    accessRoutes[0].children = constructionRouters(accessRoutes[0].children)
+    state.routes = accessRoutes
+  },
+
+  SET_TOKEN: (state, payload) => {
+    state.token = payload
+  },
+
+  /**
    * Add tagView
    * @param state
    * @param payload

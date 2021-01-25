@@ -31,7 +31,7 @@ export default async ({ app, router, Vue, store }) => {
         // Simulate when user permissions do not exist, obtain user permissions
         const userRole = sessionStorage.getItem('user_role')
         // And set the corresponding route according to the permissions
-        store.commit('SET_ROLES_AND_ROUTES', userRole)
+        process.env.MODE === 'electron' ? store.commit('LOGON_ELECTRON', userRole) : store.commit('SET_ROLES_AND_ROUTES', userRole)
         router.addRoutes(store.getters.getRoutes)
         // If addRoutes is not completed, the guard will execute it again
         next({ ...to, replace: true })
