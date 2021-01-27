@@ -1,7 +1,7 @@
 import { app, nativeTheme } from 'electron'
-import Program from './program'
-import './appEvents'
-// import './main'
+// import Program from './program'
+// import './appEvents'
+import './main/start'
 
 try {
   if (process.platform === 'win32' && nativeTheme.shouldUseDarkColors === true) {
@@ -18,4 +18,4 @@ if (process.env.PROD) {
 }
 
 // eslint-disable-next-line no-new
-new Program()
+// new Program()

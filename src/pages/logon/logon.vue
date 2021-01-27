@@ -77,7 +77,7 @@
 
         <q-card square style="min-width: 290px;height: 100%; width: 60%;" class="no-shadow">
           <q-card-section align="center">
-            <h3 class="text-uppercase">cimo</h3>
+            <h4 class="text-uppercase">cimo-electron</h4>
             <!-- 用户名 -->
             <q-input class="logon-input q-electron-drag--exception"
                      clearable

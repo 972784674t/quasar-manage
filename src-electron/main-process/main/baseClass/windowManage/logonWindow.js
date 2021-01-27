@@ -1,8 +1,8 @@
-import Window from '../window'
+import Window from './Window'
 export default class LogonWindow extends Window {
   constructor () {
     if (!LogonWindow.install) {
-      super()
+      super('logonWindow')
       LogonWindow.install = this
     }
     return LogonWindow.install
