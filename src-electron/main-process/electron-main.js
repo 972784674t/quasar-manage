@@ -1,6 +1,7 @@
 import { app, nativeTheme } from 'electron'
 import Program from './program'
 import './appEvents'
+// import './main'
 
 try {
   if (process.platform === 'win32' && nativeTheme.shouldUseDarkColors === true) {
