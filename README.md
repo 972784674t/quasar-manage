@@ -61,13 +61,6 @@ quasar dev -m electron
 quasar build
 ```
 
-<<<<<<< HEAD
-## License
-
-Copyright (c) 2015-present Razvan Stoenescu
-
-[MIT License](http://en.wikipedia.org/wiki/MIT_License)
-=======
 ### Customize the configuration
 See [Configuring quasar.conf.js](https://quasar.dev/quasar-cli/quasar-conf-js).
 
@@ -78,4 +71,3 @@ See [Configuring quasar.conf.js](https://quasar.dev/quasar-cli/quasar-conf-js).
 4. 首屏渲染优化，利用window.on('ready-to-show')配合600毫秒的延迟，解决首屏加载闪烁问题（如果有更好的方法，请改进）
 5. 利用单例模式防止滥用new BrowserWindow()产生垃圾对象
 6. 集中处理主/渲染进程通信
->>>>>>> deac9103d1d360d14986a164c298b88f1ffc8a4e
