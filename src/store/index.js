@@ -18,7 +18,7 @@ const myPlugin = store => {
     const nextState = deepClone(state)
     if (!nextState.token) console.log('退出登录')
     if (prevState.token !== nextState.token) sessionStorage.setItem('access_token', nextState.token)
-    console.log('提交mutation:', mutation, state.role)
+    console.log('提交mutation:', mutation, state)
     prevState = nextState
   })
 }

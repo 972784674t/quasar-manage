@@ -22,7 +22,6 @@ module.exports = function (ctx) {
     // https://quasar.dev/quasar-cli/boot-files
     boot: [
       electron,
-      'token',
       'i18n',
       'axios',
       'main',

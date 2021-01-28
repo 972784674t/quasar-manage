@@ -156,14 +156,14 @@ export default {
     }
   },
   methods: {
-    ...mapMutations(['SET_TOKEN']),
+    ...mapMutations(['LOGON']),
     logon () {
       this.loading = !this.loading
       if (this.username === 'admin' || this.username === 'test') {
         // sessionStorage.setItem('access_token', 972784674)
-        // this.$token.setState(972784674)
-        this.SET_TOKEN(972784674)
-        sessionStorage.setItem('user_role', this.username)
+        // this.SET_TOKEN(972784674)
+        // sessionStorage.setItem('user_role', this.username)
+        this.LOGON({ role: this.username, token: 92784674, user: { username: this.username } })
         const lt = setTimeout(() => {
           this.$router.push('/').then(e => {
             this.$q.notify({

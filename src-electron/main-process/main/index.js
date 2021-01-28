@@ -18,4 +18,3 @@ activeWindow.user.lockUser()
 
 // 接收到关闭程序通知
 console.log('接收到关闭程序通知')
-activeWindow.user.quitApp()

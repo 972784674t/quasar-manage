@@ -1,6 +1,7 @@
 import LogonWindow from '../windowManage/logonWindow'
 import MainWindow from '../windowManage/mainWindow'
 import observer from '../observer'
+import Message from '../message'
 import User from '../user'
 export default class ActiveWindow {
   constructor () {
@@ -9,6 +10,7 @@ export default class ActiveWindow {
       this.logonWindow = new LogonWindow()
       this.mainWindow = new MainWindow()
       this.user = new User()
+      this.message = new Message()
       this._listenState()
     }
     return ActiveWindow.instance

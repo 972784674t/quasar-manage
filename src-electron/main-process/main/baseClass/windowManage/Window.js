@@ -85,6 +85,7 @@ export default class Window {
   }
 
   show () {
+    this._checkModel()
     this.window.on('ready-to-show', () => {
       setTimeout(() => {
         this.window.show()
@@ -92,9 +93,18 @@ export default class Window {
     })
   }
 
-  hide () {}
+  hide () {
+    this._checkModel()
+    this.window.hide()
+  }
 
-  quit () {}
+  quit () {
+    this._checkModel()
+    console.log('quit: ', this.model)
+    // this.window.close()
+  }
 
-  quitAll () {}
+  quitAll () {
+    this._checkModel()
+  }
 }

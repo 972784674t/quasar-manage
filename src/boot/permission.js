@@ -3,6 +3,21 @@ import LoadingBar from '../components/LoadingBar/LoadingBar'
 import constantRoutes from '../router/constantRoutes'
 import { addTagView, setTagView } from '../components/TagView/tagViewUtils'
 
+// let start = false
+function parseStore (store, router) {
+  const { token, role, user } = store.state
+  if (!token || !role || !user) {
+    console.log('!token || !role || !user', store.state)
+    return false
+  } else if (store.getters.getRoutes.length) {
+    // 创建路由
+    console.log('创建路由', store.getters.getRoutes)
+    router.addRoutes(store.getters.getRoutes)
+    return true
+  }
+  return true
+}
+
 /**
  * Navigation guard and permission verification
  * @param app
@@ -15,34 +30,49 @@ export default async ({ app, router, Vue, store }) => {
   router.beforeEach((to, from, next) => {
     // Process TAGVIEW and breadcrumbs after successful login
     handleTagViewAndBreadcrumbsAndKeepAlive(from, to, store, Vue)
-    // Simulate obtaining token
-    const token = sessionStorage.getItem('access_token')
-    const userRole = sessionStorage.getItem('user_role')
-    // There is a token indicating that you have logged in
-    if (token) {
-      // You cannot access the login interface after logging in
-      if (to.path === '/login') {
-        next({ path: '/' })
-      }
-      // There is user authority, and the route is not empty, then let go
-      if (userRole && store.getters.getRoutes.length) {
-        next()
-      } else {
-        // Simulate when user permissions do not exist, obtain user permissions
-        const userRole = sessionStorage.getItem('user_role')
-        // And set the corresponding route according to the permissions
-        process.env.MODE === 'electron' ? store.commit('LOGON_ELECTRON', userRole) : store.commit('SET_ROLES_AND_ROUTES', userRole)
-        router.addRoutes(store.getters.getRoutes)
-        // If addRoutes is not completed, the guard will execute it again
-        next({ ...to, replace: true })
-      }
+    const parse = parseStore(store, router)
+    console.log('parse: ', parse)
+    console.log('router: ', router)
+    if (parse) {
+      console.log('path to: ', to.path)
+      if (to.path === '/logon') next({ path: '/' })
+      else next()
+    } else if (to.path === '/logon') {
+      next()
     } else {
-      if (to.path !== '/logon') {
-        next({ path: '/logon' })
-      } else {
-        next()
-      }
+      next({ path: '/logon' })
     }
+    // Simulate obtaining token
+    // const token = sessionStorage.getItem('access_token')
+    // const role = store.state.role
+    // const userRole = sessionStorage.getItem('user_role')
+    // There is a token indicating that you have logged in
+    // if (token) {
+    //   // You cannot access the login interface after logging in
+    //   console.log('token: ', token, to.path)
+    //   if (to.path === '/login') {
+    //     next({ path: '/' })
+    //   }
+    //   // There is user authority, and the route is not empty, then let go
+    //   if (role && store.getters.getRoutes.length) {
+    //     next()
+    //   } else {
+    //     console.log('userRole', store.getters.getRoutes)
+    //     // Simulate when user permissions do not exist, obtain user permissions
+    //     const userRole = sessionStorage.getItem('user_role')
+    //     // And set the corresponding route according to the permissions
+    //     store.commit('SET_ROLES_AND_ROUTES', userRole)
+    //     router.addRoutes(store.getters.getRoutes)
+    //     // If addRoutes is not completed, the guard will execute it again
+    //     next({ ...to, replace: true })
+    //   }
+    // } else {
+    //   if (to.path !== '/logon') {
+    //     next({ path: '/logon' })
+    //   } else {
+    //     next()
+    //   }
+    // }
   })
   router.afterEach(() => {
     // Use multiple stop() to ensure that LoadingBar is properly closed after dynamically adding routes

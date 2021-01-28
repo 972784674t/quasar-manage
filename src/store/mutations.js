@@ -19,7 +19,14 @@ const mutations = {
     accessRoutes[0].children = constructionRouters(accessRoutes[0].children)
     state.routes = accessRoutes
   },
-
+  LOGON: (state, { role, token, user }) => {
+    state.user = user
+    state.role = role
+    state.token = token
+    const accessRoutes = deepClone(asyncRoutes)
+    accessRoutes[0].children = constructionRouters(accessRoutes[0].children)
+    state.routes = accessRoutes
+  },
   /**
    * sign out
    * @param state
@@ -42,15 +49,15 @@ const mutations = {
    * @param payload
    * @constructor
    */
-  LOGON_ELECTRON: (state, payload) => {
-    console.log('LOGON调用')
-    if (process.env.MODE !== 'electron') throw new Error('非electron模式下，禁止调用')
-    console.log('electron mode')
-    state.role = payload
-    const accessRoutes = deepClone(asyncRoutes)
-    accessRoutes[0].children = constructionRouters(accessRoutes[0].children)
-    state.routes = accessRoutes
-  },
+  // LOGON_ELECTRON: (state, payload) => {
+  //   console.log('LOGON调用')
+  //   if (process.env.MODE !== 'electron') throw new Error('非electron模式下，禁止调用')
+  //   console.log('electron mode')
+  //   state.role = payload
+  //   const accessRoutes = deepClone(asyncRoutes)
+  //   accessRoutes[0].children = constructionRouters(accessRoutes[0].children)
+  //   state.routes = accessRoutes
+  // },
 
   SET_TOKEN: (state, payload) => {
     state.token = payload
