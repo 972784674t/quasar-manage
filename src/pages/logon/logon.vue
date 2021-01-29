@@ -171,7 +171,7 @@ export default {
               message: 'hi，cimo 欢迎回来',
               color: 'green',
               position: 'top',
-              timeout: 1500
+              timeout: 100
             })
             clearTimeout(lt)
             this.loading = !this.loading
