@@ -4,7 +4,7 @@
 <p align="center">
     <img src="https://img.shields.io/github/license/mashape/apistatus.svg" alt="license">
     <img src="https://img.shields.io/badge/vue-2.6.12-brightgreen.svg" alt="vue">
-  <img src="https://img.shields.io/npm/v/quasar.svg?label=quasar">  <img src="https://img.shields.io/npm/v/%40quasar/extras.svg?label=@quasar/extras"> 
+  <img src="https://img.shields.io/npm/v/quasar.svg?label=quasar">  <img src="https://img.shields.io/npm/v/%40quasar/extras.svg?label=@quasar/extras">
 </p>
 
 Quasar-Manage 是一款中后台前端解决方案：
@@ -21,7 +21,7 @@ Quasar-Manage 是一款中后台前端解决方案：
 使用这个项目前您需要了解如下技术栈：
 
 [ES6](https://es6.ruanyifeng.com/) | [Node.js](https://nodejs.org/en/) | [Webpack](https://www.webpackjs.com/) | [Vue](https://cn.vuejs.org/) | [Vuex](https://vuex.vuejs.org/zh/) | [Vue-Router](https://router.vuejs.org/zh/) | [Vuex](https://vuex.vuejs.org/zh/) | [Quasar-cli](http://www.quasarchs.com/start/quasar-cli) | [Axios](http://www.axios-js.com/) | [ESlint](https://eslint.bootcss.com/) | [Electron：如果需要](https://www.electronjs.org/)
-### DEMO地址 
+### DEMO地址
 
 [Github](https://972784674t.github.io/quasar-manage/) | [Gitee 国内用户访问](http://incimo.gitee.io/quasar-manage)
 
@@ -32,6 +32,11 @@ Quasar-Manage 是一款中后台前端解决方案：
 <p align="center">
     <img src="https://images.gitee.com/uploads/images/2021/0123/174943_5c56f9c7_5663937.png" alt="android">
 </p>
+
+### 更新日志
+- *2021/1/30*
+1 修复在微信端```<tagView>```文本不居中的问题
+2 路由```icon```改为非必要，优化没有```icon```时```<tagView>```和```<Breadcrumbs>```的显示问题
 
 ### Electron
 之后 Electron 版本的更新将在 Electron 分支进行，感谢 [CloudWoR](https://github.com/CloudWoR) 提供的支持

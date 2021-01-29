@@ -14,30 +14,30 @@
       :breakpoint="0"
     >
       <q-route-tab
-        class="tagView relative-position"
+        class="tagView"
         to="/"
         no-caps
         content-class="tagView-q-router-tab"
       >
         <template slot="default">
-          <q-icon size="21px" name="home"/>
+          <q-icon size="1.3rem" name="home"/>
           <div class="line-limit-length" style="margin: 0px 5px 0px 5px;">主页</div>
         </template>
       </q-route-tab>
 
       <template v-for="(v,i) in tagView">
+
         <q-route-tab
-          class="tagView relative-position"
+          class="tagView"
           :key="v.fullPath + i"
           :to="v.fullPath"
           no-caps
-          exact
           content-class="tagView-q-router-tab"
         >
           <template slot="default">
-            <q-icon size="21px" :name="v.icon"/>
-            <div class="line-limit-length" style="margin: 0px 5px 0px 5px;">{{ v.title }}</div>
-            <q-icon class="tagView-remove-icon" size="1.2rem" name="close"
+            <q-icon size="1.3rem" v-if="v.icon" :name="v.icon"/>
+            <div class="line-limit-length">{{ v.title }}</div>
+            <q-icon class="tagView-remove-icon" style="display: inline-flex" name="close"
                     @click.prevent.stop="removeAtagView(i)"/>
             <q-menu
               touch-position
@@ -128,8 +128,6 @@ export default {
 <style lang="css" scoped>
 
   .tagView {
-    vertical-align: middle;
-    text-align: center;
     margin: 1.5px 3px 0 3px;
     min-height: 20px;
     padding: 0 8px;
@@ -137,15 +135,15 @@ export default {
     transition: all .5s;
     border-radius: 0;
     height: 31px;
-  }
-
-  .tagView:hover {
-    background: #eeeeee;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .tagView-remove-icon {
-    opacity: 0.58;
+    font-size: 1.0rem;
     border-radius: .2rem;
+    opacity: 0.58;
     transition: all .3s;
   }
 
@@ -154,6 +152,7 @@ export default {
   }
 
   .line-limit-length {
+    margin: 0px 5px 0px 7px;
     overflow: hidden;
     max-width: 180px;
     white-space: nowrap;

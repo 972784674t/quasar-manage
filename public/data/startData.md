@@ -16,8 +16,8 @@ src
  |-boot			         # 自定义启动文件
    |-permission.js       # 鉴权文件
    |-manage.config.js    # 项目配置文件
- |-src-electron		     # electron 配置文件
- |-quasar.conf.js        # quasar 配置文件
+ src-electron		     # electron 配置文件
+ quasar.conf.js          # quasar 配置文件
 ```
 
 1、根据需要对```manage.config.js```中的项目配置进行修改

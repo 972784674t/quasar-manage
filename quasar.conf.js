@@ -67,7 +67,7 @@ module.exports = function (/* ctx */) {
       analyze: true,
 
       // sourcemap
-      productionSourceMap: false,
+      sourceMap: false,
 
       // Options below are automatically set depending on the env, set them if you want to override
       // extractCSS: false,

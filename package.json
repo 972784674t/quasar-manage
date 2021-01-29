@@ -2,7 +2,7 @@
   "name": "quasar-manage",
   "version": "0.0.1",
   "description": "A Quasar Framework app",
-  "productName": "Quasar App",
+  "productName": "Quasar Manage",
   "author": "cimo <972784674@qq.com>",
   "private": true,
   "scripts": {
