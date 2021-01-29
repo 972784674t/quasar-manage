@@ -1,4 +1,5 @@
 // import { ipcRenderer } from 'electron'
+// import deepClone from 'src/utils/clone-utils'
 // import store from '../../store'
 function renderPath (Vue) {
   const argv = process.argv
@@ -17,43 +18,20 @@ function renderPath (Vue) {
  * electron模式启动文件
  * 如果不需要构建electron程序，可以忽略此文件
  */
-
-// if (process.env.MODE === 'electron') {
-//   const remoteToken = await ipcRenderer.invoke('TOKEN')
-//   remoteToken && sessionStorage.setItem('access_token', remoteToken)
-// }
-export default async ({ app, router, Vue, publicPath }) => {
+export default async ({ app, router, Vue, publicPath, store }) => {
   if (process.env.MODE !== 'electron') return null
   renderPath(Vue)
   // 判断窗口名称
   const windowName = Vue.prototype.$windowName
   if (windowName === 'loginWindow') {
     console.log('windowName', windowName)
-    // let count = -1
-    // router.beforeEach((to, from, next) => {
-    //   // count++
-    //   // console.log('path: ', to.path)
-    //   // const token = sessionStorage.getItem('access_token')
-    //   // if (count > 3) {
-    //   //   console.log('count > 3', count)
-    //   //   count = -1
-    //   //   await ipcRenderer.invoke('QUIT-APP')
-    //   // } else if (to.path === '/logon') {
-    //   //   next()
-    //   // } else if (token) { // 如果完成登录校验，并开始进行页面跳转时，通知主进程开始加载主窗口逻辑
-    //   //   console.log('登录窗口完成登录校验逻辑：', token)
-    //   //   console.log('登录窗口完成登录校验逻辑-> count ：', count)
-    //   //   // ipcRenderer.invoke('logon', store.state)
-    //   //   next({ path: '/logon' })
-    //   // } else {
-    //   //   next({ path: '/logon' })
-    //   // }
-    //   if (to.path === '/' && from.path === '/logon') {
-    //     console.log(`由${from.path}进入${to.path}`)
-    //     console.log('store: ', store.state)
-    //   }
-    //   next()
-    // })
+    router.afterEach(async (to, from) => {
+      if (to.path === '/' && from.path === '/logon') {
+        // const state = deepClone(store.state)
+        // state.command = 'logon'
+        // await ipcRenderer.invoke('logon', JSON.stringify(state))
+      }
+    })
   }
   if (windowName === 'mainWindow') {
     // store.commit('SET_TOKEN', 972784674)

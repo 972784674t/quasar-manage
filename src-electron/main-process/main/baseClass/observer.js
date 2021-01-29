@@ -4,7 +4,7 @@ const Observer = (function () {
   const _message = {}
   return {
     // 注册消息接口
-    register: function (type, fn, selfs) {
+    register: function (selfs, type, fn) {
       if (!selfs) throw new Error('必须将当前的this环境传递进观察者对象内部')
       self[type] = selfs
       if (!_message[type]) _message[type] = []

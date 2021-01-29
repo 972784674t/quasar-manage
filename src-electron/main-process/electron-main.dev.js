@@ -15,7 +15,7 @@ electronDebug({ showDevTools: true })
 
 // Install vuejs devtools
 app.whenReady().then(() => {
-  console.log('app wenReady')
+  // console.log('app wenReady')
   // Install Vue Devtools
   try {
     // await installExtension(VUEJS_DEVTOOLS);

@@ -3,21 +3,6 @@ import LoadingBar from '../components/LoadingBar/LoadingBar'
 import constantRoutes from '../router/constantRoutes'
 import { addTagView, setTagView } from '../components/TagView/tagViewUtils'
 
-// let start = false
-// function parseStore (store, router) {
-//   const { token, role, user } = store.state
-//   if (!token || !role || !user) {
-//     console.log('!token || !role || !user', store.state)
-//     return false
-//   } else if (store.getters.getRoutes.length) {
-//     // 创建路由
-//     console.log('创建路由', store.getters.getRoutes)
-//     router.addRoutes(store.getters.getRoutes)
-//     return true
-//   }
-//   return true
-// }
-
 /**
  * Navigation guard and permission verification
  * @param app
@@ -29,52 +14,23 @@ import { addTagView, setTagView } from '../components/TagView/tagViewUtils'
 export default async ({ app, router, Vue, store }) => {
   router.beforeEach((to, from, next) => {
     // Process TAGVIEW and breadcrumbs after successful login
-    handleTagViewAndBreadcrumbsAndKeepAlive(from, to, store, Vue)
-    const { token, role /* routes */ } = store.state
-    // if (!token || !role) {
-    //   to.path === '/logon' ? next() : next({ path: '/logon' })
-    // } else {
-    //   console.log('routes', routes)
-    //   console.log('完成登录', router.options.routes)
-    //   if (router.options.routes.length <= 2) {
-    //     console.log('<=2', router.options.routes)
-    //     router.addRoutes(store.getters.getRoutes)
-    //     console.log('addRoutes: ', router.options.routes)
-    //   } else {
-    //     next()
-    //   }
-    //   next()
-    // }
-    // const parse = parseStore(store, router)
-    // console.log('parse: ', parse)
-    // console.log('router: ', router)
-    // if (parse) {
-    //   console.log('path to: ', to.path)
-    //   if (to.path === '/logon') next({ path: '/' })
-    //   else next()
-    // } else if (to.path === '/logon') {
-    //   next()
-    // } else {
-    //   next({ path: '/logon' })
-    // }
+    handleTagViewAndBreadcrumbsAndKeepAlive(to, store, Vue)
     // Simulate obtaining token
-    // const token = sessionStorage.getItem('access_token')
-    // const role = store.state.role
-    // const userRole = sessionStorage.getItem('user_role')
+    const token = sessionStorage.getItem('access_token')
+    const userRole = sessionStorage.getItem('user_role')
     // There is a token indicating that you have logged in
     if (token) {
       // You cannot access the login interface after logging in
-      console.log('token: ', token, to.path)
       if (to.path === '/login') {
         next({ path: '/' })
       }
       // There is user authority, and the route is not empty, then let go
-      if (role && store.getters.getRoutes.length) {
+      if (userRole && store.getters.getRoutes.length) {
         next()
       } else {
-        console.log('userRole', store.getters.getRoutes)
         // Simulate when user permissions do not exist, obtain user permissions
         const userRole = sessionStorage.getItem('user_role')
+        console.log('userRole: ', userRole)
         // And set the corresponding route according to the permissions
         store.commit('SET_ROLES_AND_ROUTES', userRole)
         router.addRoutes(store.getters.getRoutes)
@@ -100,7 +56,7 @@ export default async ({ app, router, Vue, store }) => {
  * Processing tagView and breadcrumbs
  * @param to
  */
-function handleTagViewAndBreadcrumbsAndKeepAlive (from, to, store, Vue) {
+function handleTagViewAndBreadcrumbsAndKeepAlive (to, store, Vue) {
   if (to.name != null) {
     document.title = to.meta.title + Vue.prototype.$title
     LoadingBar.start()
@@ -117,7 +73,7 @@ function handleTagViewAndBreadcrumbsAndKeepAlive (from, to, store, Vue) {
     if (store.getters.getTagView.length === 0 && tagViewOnSS.length !== 0) {
       setTagView(tagViewOnSS)
       store.commit('SET_KEEPALIVE_LIST', tagViewOnSS)
-    } else if (from.fullPath !== to.fullPath) {
+    } else {
       addTagView(to)
     }
     setBreadcrumbs(to.matched)

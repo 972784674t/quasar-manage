@@ -6,12 +6,21 @@ function checkStore (store) {
 const ipcHandler = (function () {
   const channel = {
     logon: (event, store) => {
-      checkStore(store)
+      // checkStore(store)
       console.log('ipcMainHandle', store)
-      user.logon(store)
     },
     logout: (event, store) => {
-      user.logout()
+      // user.logout()
+      console.log('ipcMainHandle')
+    },
+    quitApp: (event, store) => {
+      console.log('ipcMainHandle: quitApp')
+    },
+    lockUser: (event, store) => {
+      console.log('ipcMainHandle: lockUser')
+    },
+    logoff: (event, store) => {
+      console.log('ipcMainHandle: logoff')
     }
   }
   return channel

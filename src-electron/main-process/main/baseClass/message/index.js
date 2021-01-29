@@ -7,7 +7,6 @@ export default class Message {
   }
 
   mountIpcMainHandle () {
-    console.log(this.ipcMainHandle)
     Object.keys(this.ipcMainHandle).forEach(channel => {
       ipcMain.handle(channel, this.ipcMainHandle[channel])
     })

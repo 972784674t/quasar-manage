@@ -1,4 +1,4 @@
-import ActiveWindow from './baseClass/activeWindow'
+import ActiveWindow from './activeWindow'
 
 const activeWindow = new ActiveWindow()
 
@@ -10,11 +10,11 @@ console.log('接收到登录通知')
 
 // 接收到退出登录通知
 console.log('接收到退出登录通知')
-activeWindow.user.logoff()
+// activeWindow.user.logoff()
 
 // 接收到锁定用户通知
 console.log('接收到锁定用户通知')
-activeWindow.user.lockUser()
+// activeWindow.user.lockUser()
 
 // 接收到关闭程序通知
 console.log('接收到关闭程序通知')

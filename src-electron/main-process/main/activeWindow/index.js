@@ -1,8 +1,9 @@
-import LogonWindow from '../windowManage/logonWindow'
-import MainWindow from '../windowManage/mainWindow'
-import observer from '../observer'
-import Message from '../message'
-import User from '../user'
+import LogonWindow from '../baseClass/windowManage/logonWindow'
+import MainWindow from '../baseClass/windowManage/mainWindow'
+import observer from '../baseClass/observer'
+import Store from './store'
+import Message from '../baseClass/message'
+import User from '../baseClass/user'
 export default class ActiveWindow {
   constructor () {
     if (!ActiveWindow.instance) {
@@ -10,6 +11,7 @@ export default class ActiveWindow {
       this.logonWindow = new LogonWindow()
       this.mainWindow = new MainWindow()
       this.user = new User()
+      this.store = Store
       this.message = new Message()
       this._listenState()
     }
@@ -18,7 +20,7 @@ export default class ActiveWindow {
 
   // 监听state
   _listenState () {
-    observer.register('appStart', this.appStart, this)
+    this.logonWindow.show()
     observer.register('state', this.controlWindow, this)
   }
 
@@ -32,10 +34,6 @@ export default class ActiveWindow {
      *  注销/切换用户 => 关闭主窗口，显示登录窗口
      */
     this[state.command]()
-  }
-
-  appStart () {
-    this.logonWindow.show()
   }
 
   quitApp () {

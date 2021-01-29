@@ -18,4 +18,9 @@ export default class User extends Account {
     }
     return User.instance
   }
+
+  // 负责用户相关的操作
+  // 存储用户信息
+  // 分发用户对话消息
+  // 存储用户状态
 }

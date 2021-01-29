@@ -20,12 +20,9 @@ const mutations = {
     state.routes = accessRoutes
   },
   LOGON: (state, { role, token, user }) => {
-    state.user = user
-    state.role = role
-    state.token = token
-    const accessRoutes = deepClone(asyncRoutes)
-    accessRoutes[0].children = constructionRouters(accessRoutes[0].children)
-    state.routes = accessRoutes
+    sessionStorage.setItem('access_token', 972784674)
+    // this.SET_TOKEN(972784674)
+    sessionStorage.setItem('user_role', user.username)
   },
   /**
    * sign out

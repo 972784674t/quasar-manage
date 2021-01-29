@@ -122,8 +122,8 @@
             >登 录 系 统
             </q-btn>
             <div class="row justify-between" style="margin-bottom: 20px;">
-              <q-btn flat label="忘记密码"/>
-              <q-btn outline label="我要注册"/>
+              <q-btn  @click="remote('logon')" flat label="忘记密码"/>
+              <q-btn @click="remote('logout')" outline label="我要注册"/>
             </div>
             <p class="text-grey" align="left">账号2 ：test &nbsp;&nbsp;&nbsp;&nbsp;密码均为空</p>
           </q-card-section>
@@ -138,6 +138,7 @@
 <script>
 import LottieWebCimo from '../../components/LottieWebCimo/LottieWebCimo'
 import { mapMutations } from 'vuex'
+import { ipcRenderer } from 'electron'
 export default {
   name: 'logon',
   components: { LottieWebCimo },
@@ -161,7 +162,7 @@ export default {
       this.loading = !this.loading
       if (this.username === 'admin' || this.username === 'test') {
         // sessionStorage.setItem('access_token', 972784674)
-        // this.SET_TOKEN(972784674)
+        // // this.SET_TOKEN(972784674)
         // sessionStorage.setItem('user_role', this.username)
         this.LOGON({ role: this.username, token: 92784674, user: { username: this.username } })
         const lt = setTimeout(() => {
@@ -171,12 +172,12 @@ export default {
               message: 'hi，cimo 欢迎回来',
               color: 'green',
               position: 'top',
-              timeout: 100
+              timeout: 1500
             })
             clearTimeout(lt)
             this.loading = !this.loading
           })
-        }, Math.random() * 3000)
+        }, 100)
       } else {
         this.loading = !this.loading
         this.$q.notify({
@@ -187,6 +188,9 @@ export default {
           timeout: 1500
         })
       }
+    },
+    async remote (c) {
+      await ipcRenderer.invoke(c)
     },
     handleFinish (e) {
       this.isLottieF = e

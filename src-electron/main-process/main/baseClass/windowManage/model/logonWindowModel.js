@@ -18,7 +18,7 @@ const loginWindow = {
    */
   events: (window) => {
     window.on('ready-to-show', () => {
-      console.log('ready-to-sow')
+      // console.log('ready-to-sow')
     })
   }
 }
