@@ -35,7 +35,6 @@ export default {
   },
   mounted () {
     this.getMsg()
-    console.log(this.$token.setState('123123'))
   }
 }
 </script>

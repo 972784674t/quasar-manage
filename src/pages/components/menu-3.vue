@@ -12,6 +12,7 @@
 import BaseContent from '../../components/BaseContent/BaseContent'
 import jsonView from 'vue-json-views'
 import { mapMutations } from 'vuex'
+import { remote } from 'electron'
 export default {
   name: 'menu-3',
   components: {
@@ -53,7 +54,8 @@ export default {
   methods: {
     ...mapMutations(['SET_TOKEN']),
     test () {
-      this.SET_TOKEN(null)
+      const number = remote.BrowserWindow.getAllWindows().length
+      console.log('number: ', number)
     }
   }
 }

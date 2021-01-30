@@ -65,19 +65,24 @@
     </div>
 
     <!-- electron 登录 -->
-    <div class="row electron-only q-electron-drag" style="width: 100vw;min-width: 300px;background: rgba(255,255,255,0);">
+    <div class="row electron-only q-electron-drag wrap justify-around" style="width: 100vw;min-width: 300px;background: rgba(255,255,255,0);">
 
-      <div class="col flex justify-center items-center" v-show="$q.screen.gt.sm">
+      <!-- <div class="col flex justify-center items-center" v-show="$q.screen.gt.sm"> -->
+      <div class="col flex justify-center items-center">
         <q-skeleton type="text" height="100%" width="50%" v-if="!isLottieF"/>
         <lottie-web-cimo align="right" style="height: 70%" :path="defaultOptions.path" @isLottieFinish="handleFinish"/>
       </div>
-      <q-separator vertical inset v-if="$q.screen.gt.sm"/>
+      <q-separator vertical inset/>
 
       <div class="col flex justify-center items-center">
 
         <q-card square style="min-width: 290px;height: 100%; width: 60%;" class="no-shadow">
           <q-card-section align="center">
-            <h4 class="text-uppercase">cimo-electron</h4>
+            <h4 class="text-uppercase" style="color: pink">jue 桑</h4>
+            <!-- <q-img
+                :src="this.$PUBLIC_PATH + 'data/juesang.jpg'"
+                :ratio="16/9"
+              /> -->
             <!-- 用户名 -->
             <q-input class="logon-input q-electron-drag--exception"
                      clearable
@@ -122,8 +127,8 @@
             >登 录 系 统
             </q-btn>
             <div class="row justify-between" style="margin-bottom: 20px;">
-              <q-btn  @click="remote('logon')" flat label="忘记密码"/>
-              <q-btn @click="remote('logout')" outline label="我要注册"/>
+              <q-btn  @click="remote('logon', 'message: 忘记密码')" flat label="忘记密码"/>
+              <q-btn @click="remote('logout', 'message: 我要注册')" outline label="我要注册"/>
             </div>
             <p class="text-grey" align="left">账号2 ：test &nbsp;&nbsp;&nbsp;&nbsp;密码均为空</p>
           </q-card-section>
@@ -137,7 +142,7 @@
 
 <script>
 import LottieWebCimo from '../../components/LottieWebCimo/LottieWebCimo'
-import { mapMutations } from 'vuex'
+import { mapMutations, mapGetters } from 'vuex'
 import { ipcRenderer } from 'electron'
 export default {
   name: 'logon',
@@ -158,13 +163,11 @@ export default {
   },
   methods: {
     ...mapMutations(['LOGON']),
+    ...mapGetters(['getState']),
     logon () {
       this.loading = !this.loading
       if (this.username === 'admin' || this.username === 'test') {
-        // sessionStorage.setItem('access_token', 972784674)
-        // // this.SET_TOKEN(972784674)
-        // sessionStorage.setItem('user_role', this.username)
-        this.LOGON({ role: this.username, token: 92784674, user: { username: this.username } })
+        this.LOGON({}) // 必须传入一个对象
         const lt = setTimeout(() => {
           this.$router.push('/').then(e => {
             this.$q.notify({
@@ -189,8 +192,10 @@ export default {
         })
       }
     },
-    async remote (c) {
-      await ipcRenderer.invoke(c)
+    async remote (c, message) {
+      const state = this.getState()
+      console.log(state)
+      await ipcRenderer.invoke(c, message)
     },
     handleFinish (e) {
       this.isLottieF = e

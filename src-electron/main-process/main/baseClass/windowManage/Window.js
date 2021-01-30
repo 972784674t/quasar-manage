@@ -7,10 +7,10 @@ export default class Window {
     this.model = model // 窗口对应别名
     this.window = null
     this.APP_URL = process.env.APP_URL
-    this._exampleWindow()
+    // this._exampleWindow()
   }
 
-  _exampleWindow () {
+  exampleWindow () {
     // 这里的model指model文件夹下对应的配置文件
     const model = windowModel[this.model]
     if (!app.isReady()) throw new Error('app未经实例化，禁止实例化窗口')
@@ -36,7 +36,14 @@ export default class Window {
       throw new Error(`已打开（实例化）的窗口数量大于注册的窗口数量，检查是否丢失窗口控制：\n已打开（实例化）的窗口数量：${BrowserWindow.getAllWindows().length}`)
     }
     window.loadURL(this.APP_URL)
-    this.window = window
+    window.webContents.on('dom-ready', () => {
+      console.log('dom-Ready')
+    })
+    return new Promise(resolve => {
+      window.on('ready-to-show', () => {
+        resolve(this.window = window)
+      })
+    })
   }
 
   /**
@@ -84,13 +91,15 @@ export default class Window {
     if (!this.window) throw new Error(`${this.model}窗口未经实例化，请检查。`)
   }
 
-  show () {
-    this._checkModel()
-    this.window.on('ready-to-show', () => {
-      setTimeout(() => {
-        this.window.show()
-      }, 500)
-    })
+  async show (state) {
+    if (!this.window) await this.exampleWindow()
+    if (this.model === 'mainWindow') {
+      console.log('send: +++++++++++++++++++++')
+      this.window.webContents.send('mainReadyToShow', state)
+    }
+    setTimeout(() => {
+      this.window.show()
+    }, 200)
   }
 
   hide () {
@@ -100,8 +109,8 @@ export default class Window {
 
   quit () {
     this._checkModel()
-    console.log('quit: ', this.model)
-    // this.window.close()
+    this.window.close()
+    this.window = null
   }
 
   quitAll () {

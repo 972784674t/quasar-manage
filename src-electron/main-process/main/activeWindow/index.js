@@ -1,9 +1,10 @@
 import LogonWindow from '../baseClass/windowManage/logonWindow'
 import MainWindow from '../baseClass/windowManage/mainWindow'
 import observer from '../baseClass/observer'
-import Store from './store'
+import Store from '../baseClass/store'
 import Message from '../baseClass/message'
 import User from '../baseClass/user'
+import deepClone from '../../../../src/utils/deepClone'
 export default class ActiveWindow {
   constructor () {
     if (!ActiveWindow.instance) {
@@ -11,29 +12,30 @@ export default class ActiveWindow {
       this.logonWindow = new LogonWindow()
       this.mainWindow = new MainWindow()
       this.user = new User()
-      this.store = Store
+      this.store = new Store()
       this.message = new Message()
-      this._listenState()
     }
     return ActiveWindow.instance
   }
 
   // 监听state
-  _listenState () {
+  async start () {
+    await this.logonWindow.exampleWindow()
+    await this.mainWindow.exampleWindow()
     this.logonWindow.show()
-    observer.register('state', this.controlWindow, this)
+    // observer.register(this, 'state', this.controlWindow)
   }
 
-  controlWindow (state) {
-    if (!state || !state.command) throw new Error(`参数错误：controlWindo()必须接受一个完整的state作为参数。\n传入的state: ${state}`)
-    console.log('监听state，控制窗口', state)
-    /**
-     * 动作：
-     *  退出程序 => 关闭所有窗口
-     *  锁定用户界面 => 禁用主窗口，主窗口置顶，不可缩小，弹出登录窗口，不可切换用户
-     *  注销/切换用户 => 关闭主窗口，显示登录窗口
-     */
-    this[state.command]()
+  registerIpcMainHandle (channel) {
+    console.log('this.message.register: ', channel)
+    this.message.register(channel)
+    channel.forEach(channel => {
+      observer.register(this, channel, this[channel])
+    })
+  }
+
+  setRolesAndRoutes (state) {
+    this.store.setStore(deepClone(state))
   }
 
   quitApp () {
@@ -48,15 +50,15 @@ export default class ActiveWindow {
     console.log('lockUser')
   }
 
-  logoff () {
-    this.mainWindow.quit()
+  logout (message) {
+    console.log('logoff', message)
     this.logonWindow.show()
-    console.log('logoff')
+    this.mainWindow.quit()
   }
 
   logon () {
     this.logonWindow.quit()
-    this.mainWindow.show()
-    console.log('logon')
+    this.mainWindow.show(JSON.stringify(this.store.state()))
+    return JSON.stringify(this.store.state())
   }
 }

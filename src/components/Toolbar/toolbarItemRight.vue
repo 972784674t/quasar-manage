@@ -27,36 +27,36 @@
       </q-badge>
       <q-tooltip>通知</q-tooltip>
     </q-btn>
-    <q-btn round flat>
-      <q-menu>
-        <div class="row no-wrap q-pa-md">
+    <div class="electron-only">
+      <q-btn dense flat icon="minimize" @click="minimize"/>
+      <q-btn dense flat :icon="!isMaximize?'crop_square':'flip_to_front'"  @click="maximize"/>
+      <!-- <q-btn dense flat icon="close" @click="closeApp"/> -->
+      <q-btn round flat>
+        <q-menu>
+          <div class="row no-wrap q-pa-md">
 
-          <div class="column items-center">
-            <q-avatar size="72px">
-              <img :src="this.$PUBLIC_PATH + 'data/avatar.jpg'">
-            </q-avatar>
+            <div class="column items-center">
+              <q-avatar size="80px">
+                <img :src="this.$PUBLIC_PATH + 'data/avatar.jpg'">
+              </q-avatar>
 
-            <div class="text-subtitle1 q-mt-md q-mb-xs">Hi！ CIMO</div>
+              <div class="text-subtitle1 q-mt-md q-mb-xs">Hi！ CIMO</div>
 
-            <q-btn
-              color="primary"
-              label="Logout"
-              size="sm"
-              v-close-popup
-              @click="logout"
-            />
+              <q-btn
+                color="primary"
+                label="Logout"
+                size="sm"
+                v-close-popup
+                @click="logout"
+              />
+            </div>
           </div>
-        </div>
-      </q-menu>
+        </q-menu>
       <q-avatar size="26px">
         <img :src="this.$PUBLIC_PATH + 'data/avatar.jpg'">
       </q-avatar>
       <q-tooltip>账号</q-tooltip>
     </q-btn>
-    <div class="electron-only">
-      <q-btn dense flat icon="minimize" @click="minimize"/>
-      <q-btn dense flat :icon="isMaximize?'crop_square':'flip_to_front'"  @click="maximize"/>
-      <q-btn dense flat icon="close" @click="closeApp"/>
     </div>
   </div>
 </template>
@@ -101,10 +101,6 @@ export default {
       this.$store.commit('LOGOUT')
       this.$router.push('/')
       window.sessionStorage.clear()
-      if (process.env.MODE === 'electron') {
-        this.$q.electron.remote.getCurrentWindow().setSize(500, 490)
-        this.$q.electron.remote.getCurrentWindow().center()
-      }
     },
 
     // electron

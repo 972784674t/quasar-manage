@@ -10,6 +10,8 @@
 module.exports = function (ctx) {
   // 选择性加载electron启动文件
   const electron = ctx.mode.electron ? 'electron' : ''
+  const productName = 'quasar-manage'
+  const version = '0.0.1'
   return {
     // https://quasar.dev/quasar-cli/supporting-ts
     supportTS: false,
@@ -194,7 +196,7 @@ module.exports = function (ctx) {
 
     // Full list of options: https://quasar.dev/quasar-cli/developing-electron-apps/configuring-electron
     electron: {
-      bundler: 'packager', // 'packager' or 'builder'
+      bundler: 'builder', // 'packager' or 'builder'
 
       packager: {
         // https://github.com/electron-userland/electron-packager/blob/master/docs/api.md#options
@@ -212,7 +214,57 @@ module.exports = function (ctx) {
       builder: {
         // https://www.electron.build/configuration/configuration
 
-        appId: 'quasar-manage'
+        appId: 'quasar-manage',
+        // this is a configuration passed on
+        // to the underlying Webpack
+        // devtool: 'source-map',
+        win: {
+          // 图标一定不能太大，一定不能太大，一定不能太大。。。。。。。。。。。。。。。。
+          icon: 'build/icon/logo2.png',
+          publisherName: 'quasar-manage', // 程序名称
+          target: [
+            {
+              target: 'nsis',
+              arch: [
+                'ia32'
+              ]
+            }
+          ],
+          publish: [
+            // {
+            //   provider: 'generic', // 自己配置的更新服务器要选generic
+            //   url: 'http://updateServer:prop/updata/download'
+            // }
+          ]
+        },
+        nsis: {
+          // 是否一键安装，建议为 false，可以让用户点击下一步、下一步、下一步的形式安装程序，如果为true，当用户双击构建好的程序，自动安装程序并打开，即：一键安装（one-click installer）
+          oneClick: false,
+          // 允许请求提升。 如果为false，则用户必须使用提升的权限重新启动安装程序。
+          allowElevation: true,
+          // 允许修改安装目录，建议为true，是否允许用户改变安装目录，默认是不允许。
+          allowToChangeInstallationDirectory: true,
+          // 安装图标。
+          // installerIcon: 'build/icon/logo2.png',
+          // 卸载图标。
+          // uninstallerIcon: './build/icon/linux-512x512.png',
+          // 安装时头部图标。
+          // installerHeaderIcon: 'build/icon/logo.png',
+          // 创建桌面图标。
+          createDesktopShortcut: true,
+          // 创建开始菜单图标。
+          createStartMenuShortcut: true,
+          // electron中LICENSE.txt所需要的格式，并非是GBK，或者UTF-8，LICENSE.txt写好之后，需要进行转化，转化为ANSI。
+          license: 'LICENSE.txt',
+          // 网络安装程序（nsis-web）的默认设置。
+          differentialPackage: true,
+          // 控制面板中的卸载程序显示名称。
+          uninstallDisplayName: `${productName}${version}`,
+          // 是否显示辅助安装程序的安装模式安装程序页面（选择按机器还是按用户）。或者是否始终按所有用户（每台计算机）安装。
+          perMachine: true,
+          // 默认安装路径。
+          include: 'build/installer.nsh'
+        }
       },
 
       // More info: https://quasar.dev/quasar-cli/developing-electron-apps/node-integration

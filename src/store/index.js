@@ -5,21 +5,39 @@ import getters from './getters'
 import mutations from 'src/store/mutations'
 import actions from './actions'
 import modules from './modules'
-// import example from './module-example'
-import deepClone from '../utils/clone-utils'
 
 Vue.use(Vuex)
+let ipcRenderer = null
+if (process.env.MODE === 'electron') ipcRenderer = require('electron').ipcRenderer
+const handle = (function () {
+  // const observer = Vue.prototype.$observer
+  const states = {
+    LOGON: function (state) {
+      console.log('LOGON')
+      Vue.prototype.$observer.register('doLogon', () => {
+        ipcRenderer.invoke('logon')
+      })
+    },
+    SET_ROLES_AND_ROUTES: function (state) {
+      console.log('SET_ROLES_AND_ROUTES')
+      console.log('obsersver', Vue.prototype)
+      Vue.prototype.$observer.fire('doLogon')
+      ipcRenderer.invoke('setRolesAndRoutes', JSON.stringify(state))
+    },
+    LOGOUT: function (state) {
+      console.log('logout', state)
+      ipcRenderer.invoke('logout')
+    }
+  }
+  return (type, state) => {
+    states[type] && states[type](state)
+  }
+})()
 
 const myPlugin = store => {
-  // eslint-disable-next-line no-undef
-  let prevState = deepClone(store.state)
   store.subscribe((mutation, state) => {
-    // eslint-disable-next-line no-undef
-    const nextState = deepClone(state)
-    if (!nextState.token) console.log('退出登录')
-    if (prevState.token !== nextState.token) sessionStorage.setItem('access_token', nextState.token)
-    console.log('提交mutation:', mutation, state)
-    prevState = nextState
+    const type = mutation.type
+    handle(type, state)
   })
 }
 const store = new Vuex.Store({
@@ -30,7 +48,7 @@ const store = new Vuex.Store({
   modules,
   // enable strict mode (adds overhead!)
   // for dev mode only
-  plugins: [myPlugin],
+  plugins: process.env.MODE === 'electron' ? [myPlugin] : [],
   strict: process.env.DEBUGGING
 })
 

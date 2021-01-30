@@ -19,10 +19,20 @@ const mutations = {
     accessRoutes[0].children = constructionRouters(accessRoutes[0].children)
     state.routes = accessRoutes
   },
-  LOGON: (state, { role, token, user }) => {
-    sessionStorage.setItem('access_token', 972784674)
-    // this.SET_TOKEN(972784674)
-    sessionStorage.setItem('user_role', user.username)
+  LOGON: (state, { role = 'admin', token = 972784674 }) => {
+    sessionStorage.setItem('user_role', role)
+    sessionStorage.setItem('access_token', token)
+  },
+
+  /**
+   * @param state
+   * @param payload
+   * @constructor
+   */
+  STATE_INITAIL: (state, payload) => {
+    Object.keys(payload).forEach(item => {
+      state[item] = payload[item]
+    })
   },
   /**
    * sign out

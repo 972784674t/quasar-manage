@@ -1,7 +1,7 @@
-// import { ipcRenderer } from 'electron'
-// import deepClone from 'src/utils/clone-utils'
-// import store from '../../store'
+import { ipcRenderer, remote } from 'electron'
+import Observer from './Observer'
 function renderPath (Vue) {
+  Vue.prototype.$observer = new Observer()
   const argv = process.argv
   let windowName = ''
   for (let i = argv.length - 1; i > 0; i--) {
@@ -24,25 +24,18 @@ export default async ({ app, router, Vue, publicPath, store }) => {
   // 判断窗口名称
   const windowName = Vue.prototype.$windowName
   if (windowName === 'loginWindow') {
-    console.log('windowName', windowName)
-    router.afterEach(async (to, from) => {
-      if (to.path === '/' && from.path === '/logon') {
-        // const state = deepClone(store.state)
-        // state.command = 'logon'
-        // await ipcRenderer.invoke('logon', JSON.stringify(state))
-      }
-    })
+    console.log('登录窗口显示')
   }
   if (windowName === 'mainWindow') {
-    // store.commit('SET_TOKEN', 972784674)
-    // sessionStorage.setItem('user_role', 'admin')
-    // router.beforeEach(async (to, from, next) => {
-    //   const token = sessionStorage.getItem('access_token')
-    //   if (to.path === '/logon' && !token) {
-    //     await ipcRenderer.invoke('LOGOUT')
-    //     next()
-    //   }
-    //   next()
-    // })
+    console.log('主窗口显示')
+    ipcRenderer.on('mainReadyToShow', (event, args) => {
+      const state = JSON.parse(args)
+      console.log('mainReadyToShow', state)
+      // store.commit('STATE_INITAIL', state)
+      console.log('store', store.state)
+      remote.getCurrentWindow().maximize()
+    })
+    sessionStorage.setItem('access_token', 123456)
+    sessionStorage.setItem('user_role', 'admin')
   }
 }
