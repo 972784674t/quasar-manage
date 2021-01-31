@@ -1,6 +1,6 @@
 import LogonWindow from '../baseClass/windowManage/logonWindow'
 import MainWindow from '../baseClass/windowManage/mainWindow'
-import observer from '../baseClass/observer'
+import Observer from '../baseClass/observer'
 import Store from '../baseClass/store'
 import Message from '../baseClass/message'
 import User from '../baseClass/user'
@@ -14,6 +14,7 @@ export default class ActiveWindow {
       this.user = new User()
       this.store = new Store()
       this.message = new Message()
+      this.observer = new Observer()
     }
     return ActiveWindow.instance
   }
@@ -30,7 +31,7 @@ export default class ActiveWindow {
     console.log('this.message.register: ', channel)
     this.message.register(channel)
     channel.forEach(channel => {
-      observer.register(this, channel, this[channel])
+      this.observer.register(this, channel, this[channel])
     })
   }
 

@@ -1,11 +1,11 @@
-import observer from './observer'
+import Observer from './observer'
 let _state = {}
 const _remote = {}
 class Store {
   constructor () {
     if (!Store.instance) {
       this.instance = this
-      this.observer = observer
+      this.observer = new Observer()
     }
   }
 
@@ -38,12 +38,12 @@ class Store {
 
   setStore (store) {
     _state = this.isJSON(store) ? JSON.parse(store) : store
-    observer.fire('state', _state)
+    this.observer.fire('state', _state)
   }
 
   ipcMainMessage (channel, message) {
     _remote[channel] = message
-    observer.fire(channel, _remote[channel])
+    this.observer.fire(channel, _remote[channel])
   }
 }
 

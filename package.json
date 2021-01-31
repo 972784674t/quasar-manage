@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "A Quasar Framework app",
   "productName": "Quasar App",
-  "author": "cimo <972784674@qq.com>",
+  "author": "cloudWoR <972784674@qq.com>",
   "private": true,
   "scripts": {
     "dev:spa": "quasar dev",

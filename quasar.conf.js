@@ -220,7 +220,7 @@ module.exports = function (ctx) {
         // devtool: 'source-map',
         win: {
           // 图标一定不能太大，一定不能太大，一定不能太大。。。。。。。。。。。。。。。。
-          icon: 'build/icon/logo2.png',
+          icon: 'build/icon/icon.ico',
           publisherName: 'quasar-manage', // 程序名称
           target: [
             {
@@ -244,8 +244,8 @@ module.exports = function (ctx) {
           allowElevation: true,
           // 允许修改安装目录，建议为true，是否允许用户改变安装目录，默认是不允许。
           allowToChangeInstallationDirectory: true,
-          // 安装图标。
-          // installerIcon: 'build/icon/logo2.png',
+          // 安装图标。--必须为.ico文件
+          installerIcon: 'build/icon/icon.ico',
           // 卸载图标。
           // uninstallerIcon: './build/icon/linux-512x512.png',
           // 安装时头部图标。
