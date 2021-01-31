@@ -75,7 +75,7 @@ function handleTagViewAndBreadcrumbsAndKeepAlive (from, to, store, Vue) {
     } else if (from.fullPath !== to.fullPath) {
       addTagView(to)
     }
-    setBreadcrumbs(to.matched)
+    setBreadcrumbs(to.matched, to.query)
     handleKeepAlive(to)
   }
 }

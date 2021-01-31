@@ -266,7 +266,7 @@ const asyncRoutesChildren = [
     component: () => import('../pages/lottie/lottie')
   },
   {
-    path: '/tableDetail/:id',
+    path: '/tableDetail',
     name: 'tableDetail',
     meta: {
       roles: ['admin', 'editor'],
