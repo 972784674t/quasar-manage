@@ -46,6 +46,7 @@ const mutations = {
     // When entering or refreshing the page for the first time & the current route is not the root route
     if (!size && payload.fullPath !== '/') {
       state.tagView.push(payload)
+      return
     }
     // To avoid adding tagView repeatedly. Construct an array t[] identified by fullPath
     const t = []
@@ -53,7 +54,7 @@ const mutations = {
       t.push(state.tagView[i].fullPath)
     }
     // If there is no current route in t[]
-    if (t.indexOf(payload.fullPath) < 0 && size) {
+    if (t.indexOf(payload.fullPath) === -1) {
       state.tagView.push(payload)
     }
   },
