@@ -2,7 +2,7 @@ export default function () {
   return {
     role: '',
     token: null,
-    user: {},
+    username: '',
     routes: [],
     tagView: [],
     breadcrumbs: [],

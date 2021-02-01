@@ -19,7 +19,14 @@ const mutations = {
     accessRoutes[0].children = constructionRouters(accessRoutes[0].children)
     state.routes = accessRoutes
   },
-  LOGON: (state, { role = 'admin', token = 972784674 }) => {
+
+  /**
+   * @param state
+   * @param param1
+   * @constructor
+   */
+  LOGON: (state, { role = 'admin', token = 972784674, username }) => {
+    state.username = username
     sessionStorage.setItem('user_role', role)
     sessionStorage.setItem('access_token', token)
   },

@@ -164,10 +164,12 @@ export default {
   methods: {
     ...mapMutations(['LOGON']),
     ...mapGetters(['getState']),
-    logon () {
+    async logon () {
       this.loading = !this.loading
-      if (this.username === 'admin' || this.username === 'test') {
-        this.LOGON({}) // 必须传入一个对象
+      const result = await this.$store.dispatch('LOGON', { username: this.username, password: this.password })
+      console.log('result', result)
+      if (result) {
+        // this.LOGON({}) // 必须传入一个对象
         const lt = setTimeout(() => {
           this.$router.push('/').then(e => {
             this.$q.notify({

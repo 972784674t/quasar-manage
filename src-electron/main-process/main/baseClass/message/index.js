@@ -1,6 +1,11 @@
 import { ipcMain } from 'electron'
-import Store from '../store'
-const store = new Store()
+import Observer from '../observer'
+const observer = new Observer()
+const _remote = {}
+function ipcMainMessage (channel, message) {
+  _remote[channel] = message
+  observer.fire(channel, _remote[channel])
+}
 export default class Message {
   constructor () {
     this.channel = []
@@ -15,7 +20,7 @@ export default class Message {
   _handle (channel) {
     return function () {
       const message = arguments[1]
-      store.ipcMainMessage(channel, message)
+      ipcMainMessage(channel, message)
     }
   }
 

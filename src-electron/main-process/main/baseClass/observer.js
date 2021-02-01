@@ -1,7 +1,6 @@
 // 防止消息队列暴露而被篡改，将消息容器作为静态私有变量保存
 const self = {}
 const _message = {}
-const _remoteData = {}
 class Observer {
   constructor () {
     if (!Observer.instance) {
