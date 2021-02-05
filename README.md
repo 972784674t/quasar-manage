@@ -25,20 +25,55 @@ Quasar-Manage 是一款中后台前端解决方案：
 
 [Github](https://972784674t.github.io/quasar-manage/) | [Gitee 国内用户访问](https://incimo.gitee.io/quasar-manage)
 
-![SPA](https://images.gitee.com/uploads/images/2020/1121/001642_63a6fa66_5663937.png "home.png")
+![输入图片说明](https://images.gitee.com/uploads/images/2021/0201/141556_ae23dd14_5663937.png "pc.png")
 
-![Electron](https://images.gitee.com/uploads/images/2021/0122/174410_adafb537_5663937.png "electron.png")
+![输入图片说明](https://images.gitee.com/uploads/images/2021/0201/144237_25c67b18_5663937.png "elc.png")
 
 <p align="center">
-    <img src="https://images.gitee.com/uploads/images/2021/0123/174943_5c56f9c7_5663937.png" alt="android">
+    <img src="https://images.gitee.com/uploads/images/2021/0201/143433_c700edab_5663937.png" alt="android">
 </p>
 
 ### 更新日志
 - *2021/1/30*
-1 修复在微信端```<tagView>```文本不居中的问题
-2 路由```icon```改为非必要，优化没有```icon```时```<tagView>```和```<Breadcrumbs>```的显示问题
+  - 修复在微信端```<tagView>```文本不居中的问题
+  - 路由```icon```改为非必要，优化没有```icon```时```<tagView>```和```<Breadcrumbs>```的显示问题
 - *2021/2/1*
-1 当路由带```query```参数时，```<tagView>```和```<breadcrumbs>```会默认加上第一个参数的值作为标识并显示（之前沙雕了用的```params```）
+  - 当路由带```query```参数时，```<tagView>```和```<breadcrumbs>```会默认加上第一个参数的值作为标识并显示（之前沙雕了用的```params```）
+- *2021/2/5*
+  - 针对第一个被开启的嵌套路由```<keep-alive>```缓存失效，需要进行一次路由切换才能正常缓存的问题：
+经过测试是由于用来做嵌套路由的```<layout>```组件按需引入导致的，```<layout>```组件的按需引入由于是异步操作，会是嵌套路由的第一次拍平操作失效
+有两种解决方法：
+
+方法 1 ： 如果你不想修改源码，在```asyncRoutes.js```中不使用按需引入```<layout>```即可
+```js
+import layout from '../components/Layout/layout'
+
+{
+  path: '/start',
+  name: 'start',
+  component: layout,
+  children: [{...}]
+}
+```
+方法 2 （兼容按需加载）： 修改```permission.js```中的```handleKeepAlive```方法为 ```async/await```
+```js
+async function handleKeepAlive (to) {
+  if (to.matched && to.matched.length > 2) {
+    for (let i = 0; i < to.matched.length; i++) {
+      const element = to.matched[i]
+      if (element.components.default.name === 'Layout') {
+        to.matched.splice(i, 1)
+        await handleKeepAlive(to)
+      }
+      if (typeof element.components.default === 'function') {
+        await element.components.default()
+        await handleKeepAlive(to)
+      }
+    }
+  }
+}
+```
+经过测试两种方式都可行，不过，总觉得递归和异步套着来一点都不爽 ┗( ▔, ▔ )┛，所以我用第一种...能简单解决的问题，何必复杂化捏...
 
 ### Electron
 之后 Electron 版本的更新将在 Electron 分支进行，感谢 [CloudWoR](https://github.com/CloudWoR) 提供的支持
