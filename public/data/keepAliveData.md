@@ -208,4 +208,4 @@ async function handleKeepAlive (to) {
 ### layout 移除之后
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20201117142124868.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxOTEyMzk4,size_16,color_FFFFFF,t_70#pic_center)
 
-接下来就可以愉快的缓存多层次的组件了
+接下来就可以愉快的缓存多层次的组件了。

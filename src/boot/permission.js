@@ -82,7 +82,7 @@ function handleTagViewAndBreadcrumbsAndKeepAlive (from, to, store, Vue) {
 
 /**
  * Handle redundant layout: router-view and keep the current component under the first layer index <router-view>
- * This method cannot filter the on-demand loading <layout> used for nested routing
+ * This method cannot filter the on-demand loading <layout> used for nested routing.
  * @param to
  */
 function handleKeepAlive (to) {
@@ -98,7 +98,7 @@ function handleKeepAlive (to) {
 }
 
 /**
- * This method can filter on-demand loading <layout> used for nested routing
+ * This method can filter on-demand loading <layout> used for nested routing.
  * @param to
  */
 // async function handleKeepAlive (to) {

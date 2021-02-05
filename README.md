@@ -73,7 +73,7 @@ async function handleKeepAlive (to) {
   }
 }
 ```
-经过测试两种方式都可行，不过，总觉得递归和异步套着来一点都不爽 ┗( ▔, ▔ )┛，所以我用第一种...能简单解决的问题，何必复杂化捏...
+经过测试两种方式都可行，不过，总觉得递归和异步套着来一点都不爽 ┗( ▔, ▔ )┛，所以我用第一种...能简单解决的问题，何必复杂化捏....
 
 ### Electron
 之后 Electron 版本的更新将在 Electron 分支进行，感谢 [CloudWoR](https://github.com/CloudWoR) 提供的支持
