@@ -2,9 +2,10 @@
   <h1>Quasar-Manage</h1>
 </div>
 <p align="center">
-    <img src="https://img.shields.io/github/license/mashape/apistatus.svg" alt="license">
-    <img src="https://img.shields.io/badge/vue-2.6.12-brightgreen.svg" alt="vue">
-  <img src="https://img.shields.io/npm/v/quasar.svg?label=quasar">  <img src="https://img.shields.io/npm/v/%40quasar/extras.svg?label=@quasar/extras">
+      <img src="https://img.shields.io/github/license/mashape/apistatus.svg" alt="license">  
+   <img src="https://img.shields.io/static/v1?label=Quasar-Manage&message=v1.0.2%20Beta&color=blue" alt="cimo">  
+    <img src="https://img.shields.io/badge/vue-2.6.12-brightgreen.svg" alt="vue">  
+  <img src="https://img.shields.io/npm/v/quasar.svg?label=quasar&query=1.15.1">  
 </p>
 
 Quasar-Manage 是一款中后台前端解决方案：
