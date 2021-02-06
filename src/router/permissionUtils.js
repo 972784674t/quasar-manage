@@ -1,8 +1,9 @@
 import store from '../store'
 
 /**
- * <分治法> Construct routes that comply with permissions, and filter routes that do not comply with permissions
+ * <Divide and conquer> Construct routes that comply with permissions, and filter routes that do not comply with permissions
  * @param router Unfiltered route : Because the outermost layer has a {index} route for layout,
+ *                                  and index routing does not participate in permission filtering,
  *                                  the parameter is index[0].children
  * @param t Temporary variable
  * @returns {*} Filtered route

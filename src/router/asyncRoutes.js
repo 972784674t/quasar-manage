@@ -305,8 +305,9 @@ const asyncRoutes = [
     redirect: '/',
     component: () => import('../layouts/MainLayout'),
     meta: {
-      // index 应该是所有的用户都可以访问
-      roles: ['admin', 'editor', 'test']
+      // index routing does not participate in permission filtering,
+      // so there is no need to set permissions
+      // roles: ['admin', 'editor', 'test']
     },
     children: asyncRoutesChildren
   }
