@@ -49,7 +49,6 @@ module.exports = function (/* ctx */) {
     build: {
       publicPath: process.env.NODE_ENV === 'production' ? '/quasar-manage/' : '/',
       vueRouterMode: 'hash', // available values: 'hash', 'history'
-
       // transpile: false,
 
       // Add dependencies for transpiling with Babel (Array of string/regex)
@@ -88,6 +87,15 @@ module.exports = function (/* ctx */) {
       https: false,
       port: 8888,
       open: true // opens browser window automatically
+      // proxy: {
+      //   '/api': {
+      //     target: 'your API address',
+      //     changeOrigin: true,
+      //     pathRewrite: {
+      //       '^/api': ''
+      //     }
+      //   }
+      // }
     },
 
     // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-framework
