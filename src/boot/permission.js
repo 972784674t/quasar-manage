@@ -32,15 +32,18 @@ export default async ({ app, router, Vue, store }) => {
         const userRole = sessionStorage.getItem('user_role')
         // And set the corresponding route according to the permissions
         store.commit('SET_ROLES_AND_ROUTES', userRole)
+        // If you are prompted that addRoutes is deprecated, use the spread operator to complete the operation
+        // router.addRoute(...store.getters.getRoutes)
         router.addRoutes(store.getters.getRoutes)
         // If addRoutes is not completed, the guard will execute it again
         next({ ...to, replace: true })
       }
     } else {
-      if (to.path !== '/logon') {
-        next({ path: '/logon' })
-      } else {
+      // go to a route that does not require authorization
+      if (constantRoutes.some((item) => { return item.path === to.path })) {
         next()
+      } else {
+        next({ path: '/logon' })
       }
     }
   })
