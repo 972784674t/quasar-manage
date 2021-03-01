@@ -1,11 +1,11 @@
 import Axios from 'axios'
 import Vue from 'vue'
 import { Notify } from 'quasar'
+import qs from 'qs'
 
 /**
  * axios initialization
  */
-
 const axios = Axios.create({
   // baseURL: Vue.prototype.$baseURL,
   timeout: Vue.prototype.$timeOut
@@ -19,6 +19,10 @@ axios.interceptors.request.use(
       switch (config.type) {
         case 'FORM-DATA':
           config.transformRequest = [data => { return 'args=' + JSON.stringify(data) }]
+          break
+        case 'FORM':
+          config.headers['Content-Type'] = 'application/x-www-form-urlencoded'
+          config.data = qs.stringify(config.data)
           break
         default:
           break

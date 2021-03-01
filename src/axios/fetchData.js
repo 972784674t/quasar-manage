@@ -7,15 +7,15 @@ import Vue from 'vue'
  * @returns {*}
  * @author cimo
  */
-
 const fetchData = query => {
   return _axios({
     url: query.url,
     method: query.method || 'POST',
-    params: query.params, // 请求参数
+    params: query.params,
     responseType: query.responseType || 'json',
     auth: query.auth || { username: localStorage.getItem('access_token') },
-    data: query.data || ''
+    data: query.data || '',
+    type: query.type // For custom request type, please see axios-config.js
   })
 }
 
