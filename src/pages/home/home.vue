@@ -149,7 +149,7 @@
 <script>
 import countTo from 'vue-count-to'
 import BaseContent from '../../components/BaseContent/BaseContent'
-import { thumbStyle } from '../../components/BaseContent/thumbStyle'
+import { thumbStyle } from 'components/BaseContent/ThumbStyle'
 import chartPie from '../../assets/js/echarts-1'
 import charts2Option from '../../assets/js/echarts-2'
 import { income, expense, total } from '../../assets/js/echarts-3'

@@ -1,7 +1,7 @@
-import { setBreadcrumbs } from '../components/Breadcrumbs/breadcrumbsUtils'
+import { setBreadcrumbs } from 'components/Breadcrumbs/BreadcrumbsUtils'
 import LoadingBar from '../components/LoadingBar/LoadingBar'
 import constantRoutes from '../router/constantRoutes'
-import { addTagView, setTagView } from '../components/TagView/tagViewUtils'
+import { addTagView, setTagView } from 'components/TagView/TagViewUtils'
 
 /**
  * Navigation guard and permission verification

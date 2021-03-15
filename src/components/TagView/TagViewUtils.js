@@ -1,6 +1,6 @@
 import store from '../../store/index'
 import router from '../../router'
-import { getFirst } from 'src/utils/clone-utils'
+import { getFirst } from 'src/utils/cloneUtils'
 
 /**
  * Construct the meta-information of the tagView,and submit it to the store,

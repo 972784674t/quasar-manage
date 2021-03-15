@@ -56,8 +56,8 @@
 import BaseMenu from '../components/Menu/BaseMenu'
 import TagView from '../components/TagView/tagView'
 import Breadcrumbs from '../components/Breadcrumbs/Breadcrumbs'
-import ToolbarTitle from '../components/Toolbar/toolbarTitle'
-import ToolbarItemRight from '../components/Toolbar/toolbarItemRight'
+import ToolbarTitle from 'components/Toolbar/ToolbarTitle'
+import ToolbarItemRight from 'components/Toolbar/ToolbarItemRight'
 
 export default {
   name: 'MainLayout',

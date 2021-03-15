@@ -6,7 +6,7 @@ import '../components/ECharts/EChartsConfig'
 import '../components/Markdown/Markdown'
 import '../quasar.manage.config'
 import '../axios/fetchData'
-import { handleBaiduStatistics } from 'src/utils/clone-utils'
+import { handleBaiduStatistics } from 'src/utils/cloneUtils'
 
 // "async" is optional;
 // more info on params: https://quasar.dev/quasar-cli/boot-files

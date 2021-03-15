@@ -63,7 +63,7 @@
 
 <script>
 export default {
-  name: 'toolbarItemRight',
+  name: 'ToolbarItemRight',
   data () {
     return {
       search: '',
