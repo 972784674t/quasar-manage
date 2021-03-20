@@ -2,7 +2,7 @@
 :::tip
 ```quasar-cli```版本的后台获取路由 demo 和 ```vue-cli``` 版本的稍有不同
 
-```quasar-cli```的视图路由，最好不要用大驼峰命名，因为大驼峰会导致 webpack 解析异常
+```quasar-cli```的视图路由，最好不要用大驼峰命名，因为大驼峰会让 webpack 出现解析异常的警告
 
 ```quasar```作者对于动态导入的建议是使用内置的 webpack alias + [官方案例](https://next.quasar.dev/quasar-cli/lazy-loading#caveat-for-dynamic-imports) 实现动态导入
 :::

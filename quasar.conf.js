@@ -25,7 +25,7 @@ module.exports = function (/* ctx */) {
       'i18n',
       'axios',
       'main',
-      'permissionWithDynamicRouter' // 将 permissionWithDynamicRouter（后端传回的动态路由鉴权工具） 替换 permission （默认前端鉴权工具）
+      'permission' // 将 permissionWithDynamicRouter（后端传回的动态路由鉴权工具） 替换 permission （默认前端鉴权工具）
     ],
 
     // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-css
