@@ -1,4 +1,4 @@
-import layout from '../components/Layout/layout'
+import layout from '../components/Layout/Layout'
 
 /**
  * Routes that require authorized access
@@ -13,7 +13,7 @@ const asyncRoutesChildren = [
       icon: 'home',
       keepAlive: true
     },
-    component: () => import('../pages/home/home')
+    component: () => import('pages/home/home')
   },
   {
     path: '/start',
@@ -28,36 +28,57 @@ const asyncRoutesChildren = [
     children: [
       {
         path: 'getting-started',
-        name: 'getting-started',
+        name: 'gettingStarted',
         meta: {
           roles: ['admin', 'editor'],
           title: '基础配置',
           icon: 'tune',
           keepAlive: true
         },
-        component: () => import('../pages/router/getting-started')
+        component: () => import('pages/router/gettingStarted')
       },
       {
         path: 'router-config',
-        name: 'router-config',
+        name: 'routerConfig',
         meta: {
           roles: ['admin', 'editor'],
           title: '路由配置',
           icon: 'multiple_stop',
           keepAlive: true
         },
-        component: () => import('../pages/router/router-config')
+        component: () => import('pages/router/routerConfig')
       },
       {
         path: 'my-menu',
-        name: 'my-menu',
+        name: 'myMenu',
         meta: {
           roles: ['admin', 'test'],
           title: '关于菜单',
           icon: 'menu',
           keepAlive: true
         },
-        component: () => import('../pages/router/my-menu')
+        component: () => import('pages/router/myMenu')
+      },
+      {
+        path: 'async-router',
+        name: 'asyncRouter',
+        meta: {
+          roles: ['admin', 'editor'],
+          title: '动态路由',
+          icon: 'all_inclusive',
+          keepAlive: true
+        },
+        component: () => import('pages/router/asyncRouter')
+      },
+      {
+        path: 'async-router-impl',
+        name: 'asyncRouterImpl',
+        meta: {
+          roles: ['admin', 'editor'],
+          title: '动态路由实现思路',
+          keepAlive: true
+        },
+        component: () => import('pages/router/asyncRouterImpl')
       }
     ]
   },
@@ -72,7 +93,7 @@ const asyncRoutesChildren = [
     component: layout,
     children: [
       {
-        path: 'VolumeOptimization',
+        path: 'volume-optimization',
         name: 'VolumeOptimization',
         meta: {
           roles: ['admin', 'editor'],
@@ -80,10 +101,10 @@ const asyncRoutesChildren = [
           icon: 'miscellaneous_services',
           keepAlive: true
         },
-        component: () => import('../pages/optimization/VolumeOptimization')
+        component: () => import('pages/optimization/VolumeOptimization')
       },
       {
-        path: 'renderOptimization',
+        path: 'render-optimization',
         name: 'renderOptimization',
         meta: {
           roles: ['admin', 'editor'],
@@ -91,7 +112,7 @@ const asyncRoutesChildren = [
           icon: 'flip',
           keepAlive: true
         },
-        component: () => import('../pages/optimization/renderOptimization')
+        component: () => import('pages/optimization/renderOptimization')
       }
     ]
   },
@@ -108,18 +129,18 @@ const asyncRoutesChildren = [
     },
     children: [
       {
-        path: 'keep-alive-doc',
-        name: 'keep-alive-doc',
+        path: 'keepalive-doc',
+        name: 'keepaliveDoc',
         meta: {
           roles: ['admin', 'editor'],
           title: 'keep-alive 缓存',
           icon: 'select_all',
           keepAlive: true
         },
-        component: () => import('../pages/components/keep-alive-doc')
+        component: () => import('pages/components/keepaliveDoc')
       },
       {
-        path: 'scrollDemo',
+        path: 'scroll-demo',
         name: 'scrollDemo',
         meta: {
           roles: ['admin', 'editor'],
@@ -127,10 +148,10 @@ const asyncRoutesChildren = [
           icon: 'swap_vert',
           keepAlive: true
         },
-        component: () => import('../pages/components/scrollDemo')
+        component: () => import('pages/components/scrollDemo')
       },
       {
-        path: 'tagViewDemo',
+        path: 'tagView-demo',
         name: 'tagViewDemo',
         meta: {
           roles: ['admin', 'editor'],
@@ -138,10 +159,10 @@ const asyncRoutesChildren = [
           icon: 'exit_to_app',
           keepAlive: true
         },
-        component: () => import('../pages/components/tagViewDemo')
+        component: () => import('pages/components/tagViewDemo')
       },
       {
-        path: 'breadcrumbsDemo',
+        path: 'breadcrumbs-demo',
         name: 'breadcrumbsDemo',
         meta: {
           roles: ['admin', 'editor'],
@@ -150,7 +171,7 @@ const asyncRoutesChildren = [
           keepAlive: true,
           isHidden: false
         },
-        component: () => import('../pages/components/breadCrumbsDemo')
+        component: () => import('pages/components/breadCrumbsDemo')
       },
       {
         path: 'icon',
@@ -161,7 +182,7 @@ const asyncRoutesChildren = [
           icon: 'grain',
           keepAlive: true
         },
-        component: () => import('../pages/components/icon')
+        component: () => import('pages/components/icon')
       },
       {
         path: 'loading-bar',
@@ -172,7 +193,7 @@ const asyncRoutesChildren = [
           icon: 'rotate_right',
           keepAlive: true
         },
-        component: () => import('../pages/components/loading-bar')
+        component: () => import('pages/components/loadingBar')
       },
       {
         path: 'markdown',
@@ -183,7 +204,7 @@ const asyncRoutesChildren = [
           icon: 'edit_road',
           keepAlive: true
         },
-        component: () => import('../pages/components/markdown')
+        component: () => import('pages/components/markdown')
       },
       {
         path: 'json',
@@ -194,7 +215,7 @@ const asyncRoutesChildren = [
           icon: 'settings_ethernet',
           keepAlive: true
         },
-        component: () => import('../pages/components/json')
+        component: () => import('pages/components/json')
       }
     ]
   },
@@ -207,7 +228,7 @@ const asyncRoutesChildren = [
       icon: 'http',
       keepAlive: true
     },
-    component: () => import('../pages/axios/axios.vue')
+    component: () => import('pages/axios/axios.vue')
   },
   {
     path: '/menu-1',
@@ -232,14 +253,14 @@ const asyncRoutesChildren = [
         children: [
           {
             path: 'menu-3',
-            name: 'menu-3',
+            name: 'menu3',
             meta: {
               roles: ['admin', 'test'],
               title: '菜单 1-2',
               icon: 'filter_1',
               keepAlive: true
             },
-            component: () => import('../pages/components/menu-3.vue')
+            component: () => import('pages/components/menu3.vue')
           }
         ]
       }
@@ -255,8 +276,8 @@ const asyncRoutesChildren = [
     }
   },
   {
-    path: '/my-lottie',
-    name: 'my-lottie',
+    path: '/lottie',
+    name: 'lottie',
     meta: {
       roles: ['admin', 'editor'],
       title: 'lottie 动效',
@@ -264,10 +285,10 @@ const asyncRoutesChildren = [
       icon: 'videocam',
       keepAlive: true
     },
-    component: () => import('../pages/lottie/lottie')
+    component: () => import('pages/lottie/lottie')
   },
   {
-    path: '/tableDetail',
+    path: '/table-detail',
     name: 'tableDetail',
     meta: {
       roles: ['admin', 'editor'],
@@ -275,7 +296,7 @@ const asyncRoutesChildren = [
       icon: 'blur_linear',
       isHidden: true
     },
-    component: () => import('../pages/home/tableDetail')
+    component: () => import('pages/home/tableDetail')
   },
   {
     path: '/cimo',
@@ -286,7 +307,7 @@ const asyncRoutesChildren = [
       icon: 'fab fa-studiovinari',
       isHidden: true
     },
-    component: () => import('../pages/components/cimo')
+    component: () => import('pages/components/cimo')
   },
   {
     path: '*', // This must be placed at the bottom
@@ -303,14 +324,11 @@ const asyncRoutes = [
     path: '/',
     name: 'index',
     redirect: '/',
-    component: () => import('../layouts/MainLayout'),
-    meta: {
-      // index routing does not participate in permission filtering,
-      // so there is no need to set permissions
-      // roles: ['admin', 'editor', 'test']
-    },
+    component: () => import('layouts/MainLayout'),
     children: asyncRoutesChildren
   }
 ]
 
 export default asyncRoutes
+
+export { asyncRoutesChildren }

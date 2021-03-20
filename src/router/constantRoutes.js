@@ -8,7 +8,7 @@ const constantRoutes = [
     meta: {
       title: '登录'
     },
-    component: () => import('../pages/logon/logon.vue')
+    component: () => import('pages/logon/logon.vue')
   },
   {
     path: '/NoFound404',

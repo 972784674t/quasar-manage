@@ -2,10 +2,10 @@
   <h1>Quasar-Manage</h1>
 </div>
 <p align="center">
-      <img src="https://img.shields.io/github/license/mashape/apistatus.svg" alt="license">  
-   <img src="https://img.shields.io/static/v1?label=Quasar-Manage&message=v1.0.2%20Beta&color=blue" alt="cimo">  
-    <img src="https://img.shields.io/badge/vue-2.6.12-brightgreen.svg" alt="vue">  
-  <img src="https://img.shields.io/static/v1?label=quasar&message=v1.15.1&color=blue">  
+      <img src="https://img.shields.io/github/license/mashape/apistatus.svg" alt="license">
+   <img src="https://img.shields.io/static/v1?label=Quasar-Manage&message=v1.0.2%20Beta&color=blue" alt="cimo">
+    <img src="https://img.shields.io/badge/vue-2.6.12-brightgreen.svg" alt="vue">
+  <img src="https://img.shields.io/static/v1?label=quasar&message=v1.15.1&color=blue">
 </p>
 
 Quasar-Manage 是一款中后台前端解决方案：
@@ -75,6 +75,9 @@ async function handleKeepAlive (to) {
 }
 ```
 经过测试两种方式都可行，不过，总觉得递归和异步套着来一点都不爽 ┗( ▔, ▔ )┛，所以我用第一种...能简单解决的问题，何必复杂化捏...
+- *2021/3/20*
+  - 如果路由的 roles 没有被设置或为空，则所有用户均可访问
+  - 添加了后端动态获取路由的 DEMO，并提供了实现思路作为学习交流
 
 ### Electron
 之后 Electron 版本的更新将在 Electron 分支进行，感谢 [CloudWoR](https://github.com/CloudWoR) 提供的支持

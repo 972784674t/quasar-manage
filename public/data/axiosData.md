@@ -1,6 +1,6 @@
 ## Axios：在 VUE 实例中封装了一个全局请求工具类 fetchData
 :::tip
-```(axios/fetchData.js)```：封装了```post```和```FormData```的数据发送
+```(axios/FetchData.js)```：封装了```post```和```FormData```的数据发送
 :::
 
 ```js

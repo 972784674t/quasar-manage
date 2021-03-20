@@ -8,11 +8,11 @@
 </template>
 
 <script>
-import BaseContent from '../../components/BaseContent/BaseContent'
-import SkeletonDemo from '../../components/Skeleton/SkeletonDemo'
+import BaseContent from 'components/BaseContent/BaseContent'
+import SkeletonDemo from 'components/Skeleton/SkeletonDemo'
 
 export default {
-  name: 'getting-started',
+  name: 'myMenu',
   components: { SkeletonDemo, BaseContent },
   data () {
     return {
@@ -24,7 +24,7 @@ export default {
     getMsg () {
       this.isLoadingVisible = !this.isLoadingVisible
       const query = {
-        url: this.$PUBLIC_PATH + 'data/startData.md',
+        url: this.$PUBLIC_PATH + 'data/menuData.md',
         method: 'get',
         responseType: 'text'
       }

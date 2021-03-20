@@ -1,6 +1,6 @@
 import asyncRoutes from '../router/asyncRoutes'
 import constructionRouters from '../router/permissionUtils'
-import deepClone from '../utils/cloneUtils'
+import deepClone from '../utils/CloneUtils'
 import router, { resetRouter } from '../router'
 import { removeATagView, removeOneSide } from 'components/TagView/TagViewUtils'
 
@@ -18,6 +18,11 @@ const mutations = {
     const accessRoutes = deepClone(asyncRoutes)
     accessRoutes[0].children = constructionRouters(accessRoutes[0].children)
     state.routes = accessRoutes
+  },
+
+  // 将动态获取的路由设置到 store 中
+  SET_ROLES: (state, payload) => {
+    state.routes = payload
   },
 
   /**

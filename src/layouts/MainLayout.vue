@@ -54,7 +54,7 @@
 
 <script>
 import BaseMenu from '../components/Menu/BaseMenu'
-import TagView from '../components/TagView/tagView'
+import TagView from 'components/TagView/TagView'
 import Breadcrumbs from '../components/Breadcrumbs/Breadcrumbs'
 import ToolbarTitle from 'components/Toolbar/ToolbarTitle'
 import ToolbarItemRight from 'components/Toolbar/ToolbarItemRight'

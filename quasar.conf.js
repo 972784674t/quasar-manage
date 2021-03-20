@@ -7,6 +7,9 @@
 // https://quasar.dev/quasar-cli/quasar-conf-js
 /* eslint-env node */
 
+// function resolve (dir) {
+//   return path.join(__dirname, dir)
+// }
 module.exports = function (/* ctx */) {
   return {
     // https://quasar.dev/quasar-cli/supporting-ts
@@ -22,7 +25,7 @@ module.exports = function (/* ctx */) {
       'i18n',
       'axios',
       'main',
-      'permission'
+      'permissionWithDynamicRouter' // 将 permissionWithDynamicRouter（后端传回的动态路由鉴权工具） 替换 permission （默认前端鉴权工具）
     ],
 
     // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-css
@@ -50,7 +53,7 @@ module.exports = function (/* ctx */) {
       publicPath: process.env.NODE_ENV === 'production' ? '/quasar-manage/' : '/',
       vueRouterMode: 'hash', // available values: 'hash', 'history'
       // transpile: false,
-
+      vueCompiler: true,
       // Add dependencies for transpiling with Babel (Array of string/regex)
       // (from node_modules, which are by default not transpiled).
       // Applies only if "transpile" is set to true.
