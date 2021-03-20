@@ -81,7 +81,7 @@ import Layout from '../components/Layout/Layout'
 :::tip
 从后端请求动态路由的操作，我使用```github page```模拟了一个后台接口```getUserRouter```
 
-请求的数据存储在```data/asyncRouterDemo```中
+请求的数据存储在[```data/asyncRouterDemo```](https://github.com/972784674t/quasar-manage/blob/master/public/data/asyncRouterDemo)中
 :::
 ```boot/permissionWithDynamicRouter.js```
 ```js
@@ -151,7 +151,7 @@ export default router
 到这里从后端获取路由的操作就结束了，其实就是路由的数据来源改变。
 
 :::tip
-如果你只希望知道如何使用，请看```动态路由```的源码，同时记得在```quasar.conf.js```中使用专门用于动态路由的鉴权工具```permissionWithDynamicRouter```即可
+如果你只希望知道如何使用，请看[```动态路由```](https://github.com/972784674t/quasar-manage/blob/master/src/pages/router/asyncRouter.vue)的源码，同时记得在```quasar.conf.js```中使用专门用于动态路由的鉴权工具```permissionWithDynamicRouter```即可
 ```js
 // line 24
 boot: [
