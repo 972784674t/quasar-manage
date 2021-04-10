@@ -7538,9 +7538,9 @@ qs@6.7.0:
   integrity sha1-QdwaAV49WB8WIXdr4xr7KHapsbw=
 
 quasar@^1.0.0:
-  version "1.15.6"
-  resolved "https://registry.npm.taobao.org/quasar/download/quasar-1.15.6.tgz#15b78ef74844630656a8bcc8ed5d8a3c8ff0f65f"
-  integrity sha1-FbeO90hEYwZWqLzI7V2KPI/w9l8=
+  version "1.15.1"
+  resolved "https://registry.npm.taobao.org/quasar/download/quasar-1.15.1.tgz"
+  integrity sha1-2mlo98WNCwna+dheD02hQwrl3aI=
 
 query-string@^4.1.0:
   version "4.3.4"
