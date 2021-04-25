@@ -276,7 +276,7 @@ export default {
   methods: {
     handleTableClick (e) {
       this.$router.push({
-        path: 'tableDetail',
+        path: 'table-detail',
         query: {
           id: e.name
         }
