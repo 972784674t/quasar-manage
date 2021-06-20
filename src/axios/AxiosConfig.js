@@ -62,7 +62,7 @@ axios.interceptors.response.use(
         Notify.create(defaultNotify)
         break
       case 408:
-        defaultNotify.message = '请求超时(404)'
+        defaultNotify.message = '请求超时(408)'
         Notify.create(defaultNotify)
         break
       case 500:
