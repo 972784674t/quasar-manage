@@ -1,8 +1,8 @@
-.app-main{
+.app-main {
     width: 100%;
     position: relative;
 }
-.echarts{
+.echarts {
     width: 100% !important;
     height: 100% !important;
 }
@@ -10,3 +10,8 @@
     height: 100%;
     background-color: #fcfcff;
 }
+
+aside {
+  top: 86px;
+}
+

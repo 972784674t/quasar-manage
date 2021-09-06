@@ -84,6 +84,8 @@ async function handleKeepAlive (to) {
   - 添加了后端动态获取路由的 DEMO，并提供了实现思路作为学习交流
 - *2021/4/10*
   - 将 quasar 版本降低为 1.15.1 ，修复 ios 端 input 重复输入的问题
+- *2021/9/05*
+  - 修复侧边栏在特定分辨率下会出现滚动条的问题
 
 ### Electron
 之后 Electron 版本的更新将在 Electron 分支进行，感谢 [CloudWoR](https://github.com/CloudWoR) 提供的支持
